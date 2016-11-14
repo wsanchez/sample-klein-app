@@ -9,6 +9,9 @@ from .hello import Application as HelloApplication
 from .math import Application as MathApplication
 
 
+__all__ = ["Application"]
+
+
 class Application(object):
     app = Klein()
 

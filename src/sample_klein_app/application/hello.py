@@ -5,6 +5,9 @@ Hello application
 from klein import Klein
 
 
+__all__ = ["Application"]
+
+
 class Application(object):
     app = Klein()
 
