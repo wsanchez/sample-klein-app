@@ -13,25 +13,25 @@ __all__ = ["Application"]
 
 
 class Application(object):
-    app = Klein()
+    router = Klein()
 
-    @app.route("/")
+    @router.route("/")
     def root(self, request):
         return "This is a web application composed from multiple applications."
 
-    @app.route("/dns/", branch=True)
+    @router.route("/dns/", branch=True)
     def dns(self, request):
-        return DNSApplication().app.resource()
+        return DNSApplication().router.resource()
 
-    @app.route("/hello/", branch=True)
+    @router.route("/hello/", branch=True)
     def hello(self, request):
-        return HelloApplication().app.resource()
+        return HelloApplication().router.resource()
 
-    @app.route("/math/", branch=True)
+    @router.route("/math/", branch=True)
     def math(self, request):
-        return MathApplication().app.resource()
+        return MathApplication().router.resource()
 
 
 if __name__ == "__main__":
     application = Application()
-    application.app.run("localhost", 8080)
+    application.router.run("localhost", 8080)

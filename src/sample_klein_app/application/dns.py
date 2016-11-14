@@ -14,13 +14,13 @@ __all__ = ["Application"]
 
 
 class Application(object):
-    app = Klein()
+    router = Klein()
 
-    @app.route("/")
+    @router.route("/")
     def root(self, request):
         return "DNS API."
 
-    @app.route("/gethostbyname/<name>")
+    @router.route("/gethostbyname/<name>")
     @inlineCallbacks
     def hostname(self, request, name):
         try:
@@ -37,4 +37,4 @@ class Application(object):
 
 if __name__ == "__main__":
     application = Application()
-    application.app.run("localhost", 8080)
+    application.router.run("localhost", 8080)

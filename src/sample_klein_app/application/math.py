@@ -9,7 +9,7 @@ __all__ = ["Application"]
 
 
 class Application(object):
-    app = Klein()
+    router = Klein()
 
     @staticmethod
     def numberify(string):
@@ -18,31 +18,31 @@ class Application(object):
         else:
             return int(string)
 
-    @app.route("/")
+    @router.route("/")
     def root(self, request):
         return "Math happens here."
 
-    @app.route("/add/<a>/<b>")
+    @router.route("/add/<a>/<b>")
     def add(self, request, a, b):
         return "{}".format(self.numberify(a) + self.numberify(b))
 
-    @app.route("/subtract/<a>/<b>")
+    @router.route("/subtract/<a>/<b>")
     def subtract(self, request, a, b):
         return "{}".format(self.numberify(a) - self.numberify(b))
 
-    @app.route("/multiply/<a>/<b>")
+    @router.route("/multiply/<a>/<b>")
     def multiply(self, request, a, b):
         return "{}".format(self.numberify(a) * self.numberify(b))
 
-    @app.route("/divide/<a>/<b>")
+    @router.route("/divide/<a>/<b>")
     def divide(self, request, a, b):
         return "{}".format(self.numberify(a) / self.numberify(b))
 
-    @app.handle_errors(ValueError)
+    @router.handle_errors(ValueError)
     def valueError(self, request, failure):
         return "Invalid inputs provided."
 
 
 if __name__ == "__main__":
     application = Application()
-    application.app.run("localhost", 8080)
+    application.router.run("localhost", 8080)

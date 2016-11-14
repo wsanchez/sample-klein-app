@@ -9,13 +9,13 @@ __all__ = ["Application"]
 
 
 class Application(object):
-    app = Klein()
+    router = Klein()
 
-    @app.route("/")
+    @router.route("/")
     def hello(self, request):
         return "Hello!"
 
 
 if __name__ == "__main__":
     application = Application()
-    application.app.run("localhost", 8080)
+    application.router.run("localhost", 8080)
