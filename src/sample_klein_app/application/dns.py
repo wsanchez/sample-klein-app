@@ -35,6 +35,6 @@ class Application(object):
         return address
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     application = Application()
     application.router.run("localhost", 8080)
