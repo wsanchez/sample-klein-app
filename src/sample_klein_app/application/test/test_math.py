@@ -2,22 +2,25 @@
 Tests for L{sample_klein_app.application.math}.
 """
 
-from twisted.internet.defer import inlineCallbacks
 from twisted.web import http
 from twisted.trial import unittest
 
-from .mock_render import mock_request, render
+from .mock_render import assertResponse
 
 from sample_klein_app.application.math import Application
 
 
-__all__ = []
+__all__ = ["MathApplicationTests"]
 
 
 class MathApplicationTests(unittest.TestCase):
     """
     Tests for L{sample_klein_app.application.math}.
     """
+
+    def assertResponse(self, *args, **kwargs):
+        application = Application()
+        return assertResponse(self, application, *args, **kwargs)
 
     def test_numberify_integer(self):
         """
@@ -42,69 +45,42 @@ class MathApplicationTests(unittest.TestCase):
             self.assertEqual(result_value, float_value)
             self.assertEqual(type(result_value), float)
 
-    @inlineCallbacks
     def test_root(self):
         """
         L{Application.root} returns a canned string.
         """
-        app = Application()
-        request = mock_request(b"/")
-        yield render(app, request)
+        return self.assertResponse(b"/", response_data=b"Math happens here.")
 
-        self.assertEqual(request.getWrittenData(), b"Math happens here.")
-
-    @inlineCallbacks
     def test_add(self):
         """
         L{Application.add} sums C{a} and C{b}.
         """
-        app = Application()
-        request = mock_request(b"/add/1/3")
-        yield render(app, request)
+        return self.assertResponse(b"/add/1/3", response_data=b"4")
 
-        self.assertEqual(request.getWrittenData(), b"4")
-
-    @inlineCallbacks
     def test_subtract(self):
         """
         L{Application.subtract} subtracts C{b} from C{a}.
         """
-        app = Application()
-        request = mock_request(b"/subtract/4/1")
-        yield render(app, request)
+        return self.assertResponse(b"/subtract/4/1", response_data=b"3")
 
-        self.assertEqual(request.getWrittenData(), b"3")
-
-    @inlineCallbacks
     def test_multiply(self):
         """
         L{Application.multiply} multiplies C{a} and C{b}.
         """
-        app = Application()
-        request = mock_request(b"/multiply/2/3")
-        yield render(app, request)
+        return self.assertResponse(b"/multiply/2/3", response_data=b"6")
 
-        self.assertEqual(request.getWrittenData(), b"6")
-
-    @inlineCallbacks
     def test_divide(self):
         """
         L{Application.divide} divides C{a} by C{b}.
         """
-        app = Application()
-        request = mock_request(b"/divide/12/3")
-        yield render(app, request)
+        return self.assertResponse(b"/divide/12/3", response_data=b"4.0")
 
-        self.assertEqual(request.getWrittenData(), b"4.0")
-
-    @inlineCallbacks
     def test_invalid_input(self):
         """
         Invalid inputs result in an error.
         """
-        app = Application()
-        request = mock_request(b"/divide/fish/carrots")
-        yield render(app, request)
-
-        self.assertEqual(request.getWrittenData(), b"Invalid inputs provided.")
-        self.assertEqual(request.code, http.BAD_REQUEST)
+        return self.assertResponse(
+            b"/divide/fish/carrots",
+            response_data=b"Invalid inputs provided.",
+            response_code=http.BAD_REQUEST,
+        )
