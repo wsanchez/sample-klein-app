@@ -34,3 +34,4 @@ This sample application attempts to demonstrate a few things:
 .. _Twisted: http://twistedmatrix.com/
 
 .. |travis| image:: https://api.travis-ci.org/wsanchez/sample-klein-app.svg?branch=master
+.. _travis https://travis-ci.org/wsanchez/sample-klein-app
