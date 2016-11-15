@@ -2,11 +2,10 @@
 Tests for L{sample_klein_app.application.math}.
 """
 
-from twisted.internet.defer import succeed, inlineCallbacks
-from twisted.web.server import NOT_DONE_YET
+from twisted.internet.defer import inlineCallbacks
 from twisted.trial import unittest
 
-from klein.test.test_resource import requestMock
+from .mock_render import mock_request, render
 
 from sample_klein_app.application.math import Application
 
@@ -48,8 +47,8 @@ class MathApplicationTests(unittest.TestCase):
         L{Application.root} returns a canned string.
         """
         app = Application()
-        request = requestMock(b"/")
-        yield render(app.router, request)
+        request = mock_request(b"/")
+        yield render(app, request)
 
         self.assertEqual(request.getWrittenData(), b"Math happens here.")
 
@@ -59,8 +58,8 @@ class MathApplicationTests(unittest.TestCase):
         L{Application.add} sums C{a} and C{b}.
         """
         app = Application()
-        request = requestMock(b"/add/1/3")
-        yield render(app.router, request)
+        request = mock_request(b"/add/1/3")
+        yield render(app, request)
 
         self.assertEqual(request.getWrittenData(), b"4")
 
@@ -70,8 +69,8 @@ class MathApplicationTests(unittest.TestCase):
         L{Application.subtract} subtracts C{b} from C{a}.
         """
         app = Application()
-        request = requestMock(b"/subtract/4/1")
-        yield render(app.router, request)
+        request = mock_request(b"/subtract/4/1")
+        yield render(app, request)
 
         self.assertEqual(request.getWrittenData(), b"3")
 
@@ -81,8 +80,8 @@ class MathApplicationTests(unittest.TestCase):
         L{Application.multiply} multiplies C{a} and C{b}.
         """
         app = Application()
-        request = requestMock(b"/multiply/2/3")
-        yield render(app.router, request)
+        request = mock_request(b"/multiply/2/3")
+        yield render(app, request)
 
         self.assertEqual(request.getWrittenData(), b"6")
 
@@ -92,8 +91,8 @@ class MathApplicationTests(unittest.TestCase):
         L{Application.divide} divides C{a} by C{b}.
         """
         app = Application()
-        request = requestMock(b"/divide/12/3")
-        yield render(app.router, request)
+        request = mock_request(b"/divide/12/3")
+        yield render(app, request)
 
         self.assertEqual(request.getWrittenData(), b"4.0")
 
@@ -103,23 +102,7 @@ class MathApplicationTests(unittest.TestCase):
         Invalid inputs result in an error.
         """
         app = Application()
-        request = requestMock(b"/divide/fish/carrots")
-        yield render(app.router, request)
+        request = mock_request(b"/divide/fish/carrots")
+        yield render(app, request)
 
         self.assertEqual(request.getWrittenData(), b"Invalid inputs provided.")
-
-
-def render(router, request, notifyFinish=True):
-    result = router.resource().render(request)
-
-    if isinstance(result, bytes):
-        request.write(result)
-        request.finish()
-        return succeed(None)
-    elif result is NOT_DONE_YET:
-        if request.finished or not notifyFinish:
-            return succeed(None)
-        else:
-            return request.notifyFinish()
-    else:
-        raise ValueError("Unexpected return value: %r" % (result,))
