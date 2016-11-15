@@ -2,6 +2,8 @@
 Math application
 """
 
+from twisted.web import http
+
 from klein import Klein
 
 
@@ -40,6 +42,7 @@ class Application(object):
 
     @router.handle_errors(ValueError)
     def valueError(self, request, failure):
+        request.setResponseCode(http.BAD_REQUEST)
         return "Invalid inputs provided."
 
 

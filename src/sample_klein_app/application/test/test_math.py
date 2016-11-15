@@ -3,6 +3,7 @@ Tests for L{sample_klein_app.application.math}.
 """
 
 from twisted.internet.defer import inlineCallbacks
+from twisted.web import http
 from twisted.trial import unittest
 
 from .mock_render import mock_request, render
@@ -106,3 +107,4 @@ class MathApplicationTests(unittest.TestCase):
         yield render(app, request)
 
         self.assertEqual(request.getWrittenData(), b"Invalid inputs provided.")
+        self.assertEqual(request.code, http.BAD_REQUEST)
