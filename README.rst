@@ -1,6 +1,10 @@
 Sample Klein App
 ================
 
+.. image:: https://api.travis-ci.org/wsanchez/sample-klein-app.svg?branch=master
+    :target: https://travis-ci.org/wsanchez/sample-klein-app
+    :alt: Build Status
+
 |travis|
 
 A sample application in Python, using the Klein_ web framework.
@@ -32,6 +36,3 @@ This sample application attempts to demonstrate a few things:
 .. _Flask: http://flask.pocoo.org/
 .. _Klein: https://github.com/twisted/klein/
 .. _Twisted: http://twistedmatrix.com/
-
-.. |travis| image:: https://api.travis-ci.org/wsanchez/sample-klein-app.svg?branch=master
-.. _travis https://travis-ci.org/wsanchez/sample-klein-app
