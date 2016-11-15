@@ -13,10 +13,13 @@ install:
 matrix:
   include:
     - python: 3.5
+      env: TOXENV=pyflakes
+
+    - python: 3.5
       env: TOXENV=py35-trial-coverage
 
     - python: 3.5
-      env: TOXENV=pyflakes
+      env: TOXENV=coverage_combined
 
 
 script:
