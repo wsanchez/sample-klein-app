@@ -15,16 +15,14 @@ __all__ = [
 
 @inlineCallbacks
 def assertResponse(
-    test, application, request_path, response_data=None, response_code=http.OK,
+    test, application, request_path, response_data, response_code=http.OK,
 ):
     request = mock_request(request_path)
 
     yield render(application, request)
 
     test.assertEqual(request.code, response_code)
-
-    if response_data is not None:
-        test.assertEqual(request.getWrittenData(), response_data)
+    test.assertEqual(request.getWrittenData(), response_data)
 
 
 def render(app, request, notifyFinish=True):
