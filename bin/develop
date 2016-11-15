@@ -106,6 +106,9 @@ venv_init () {
 
   echo "Updating pip...";
   "${python}" -m pip install --upgrade pip;
+
+  echo "Installing mock...";
+  "${python}" -m pip install mock;
 }
 
 venv_install_requirements () {
