@@ -1,5 +1,8 @@
 language: python
 
+# We don't need sudo, and setting this to false means faster VM bootup.
+sudo: false
+
 
 branches:
   only:
