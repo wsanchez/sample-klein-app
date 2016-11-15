@@ -5,8 +5,6 @@ Sample Klein App
     :target: https://travis-ci.org/wsanchez/sample-klein-app
     :alt: Build Status
 
-|travis|
-
 A sample application in Python, using the Klein_ web framework.
 
 Klein is a lightweight web framework, similar to Flask_ or Bottle_.
