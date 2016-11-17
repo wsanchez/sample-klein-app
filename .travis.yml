@@ -18,6 +18,9 @@ matrix:
     - python: 3.5
       env: TOXENV=pyflakes
 
+    - python: 3.4
+      env: TOXENV=py34-trial-coverage,codecov_publish
+
     - python: 3.5
       env: TOXENV=py35-trial-coverage,codecov_publish
 
