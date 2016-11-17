@@ -21,8 +21,9 @@ name = "sample-klein-app"
 
 description = "Sample Twisted Klein Application"
 
+readme_path = Path(__file__).parent / "README.rst"
 try:
-    long_description = (Path(__file__).parent / "README.rst").read_text()
+    long_description = readme_path.open().read()
 except IOError:
     long_description = None
 
