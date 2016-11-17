@@ -4,6 +4,9 @@ Sample Klein App
 .. image:: https://api.travis-ci.org/wsanchez/sample-klein-app.svg?branch=master
     :target: https://travis-ci.org/wsanchez/sample-klein-app
     :alt: Build Status
+.. image:: https://codecov.io/github/wsanchez/sample-klein-app/coverage.svg?branch=master
+    :target: https://codecov.io/github/wsanchez/sample-klein-app?branch=master
+    :alt: Code Coverage
 
 A sample application in Python, using the Klein_ web framework.
 
