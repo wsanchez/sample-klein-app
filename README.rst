@@ -7,6 +7,9 @@ Sample Klein App
 .. image:: https://codecov.io/github/wsanchez/sample-klein-app/coverage.svg?branch=master
     :target: https://codecov.io/github/wsanchez/sample-klein-app?branch=master
     :alt: Code Coverage
+.. image:: https://requires.io/github/wsanchez/sample-klein-app/requirements.svg?branch=master
+    :target: https://requires.io/github/wsanchez/sample-klein-app/requirements/?branch=master
+    :alt: Requirements Status
 
 A sample application in Python, using the Klein_ web framework.
 
