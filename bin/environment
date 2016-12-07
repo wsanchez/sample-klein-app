@@ -1,6 +1,11 @@
 #!/usr/bin/env python
 
-from sys import stdout, version
+"""
+Print information about the environment.
+This is used by CI tools.
+"""
+
+from sys import stdout, version, executable
 from os import environ as environment, getcwd
 
 
@@ -29,6 +34,9 @@ out.line(getcwd())
 out.heading("OS environment")
 for key in sorted(environment):
     out.line(key + " = " + environment[key])
+
+out.heading("Python executable")
+out.line(executable)
 
 out.heading("Python version")
 for line in version.split("\n"):
