@@ -25,8 +25,7 @@ This sample application attempts to demonstrate a few things:
     See math.py_.
   * Composition of Klein applications.
     See composite.py_.
-  * Using Twisted to write asynchronous code, with the `@inlineCallbacks`
-    decorator.
+  * Using Twisted to write asynchronous code using ``async``/``await``.
     See dns.py_.
 
 .. ------------------------------------------------------------------------- ..
