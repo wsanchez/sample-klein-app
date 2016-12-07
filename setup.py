@@ -71,7 +71,7 @@ for tool, (module, function) in script_entry_points.items():
 setup_requirements = []
 
 install_requirements = [
-    "Twisted",
+    "Twisted>=16.6.0",
     "klein",
 ]
 

@@ -1,7 +1,6 @@
 -e .  # Get self and dependencies from setup.py
 
-    #Twisted==16.5.0
-    git+https://github.com/twisted/twisted.git#egg=Twisted
+    Twisted==16.6.0
         zope.interface==4.3.2
 
     klein==15.3.1
