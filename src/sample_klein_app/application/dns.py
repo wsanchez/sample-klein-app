@@ -15,16 +15,6 @@ from klein import Klein
 __all__ = ["Application"]
 
 
-# Ideally, we want Klein to handle coroutines natively, so we won't need this
-# decorator.
-def twisted_async(f):
-    @wraps(f)
-    def wrapper(*args, **kwargs):
-        result = f(*args, **kwargs)
-        return ensureDeferred(result)
-    return wrapper
-
-
 class Application(object):
     router = Klein()
 
@@ -33,7 +23,6 @@ class Application(object):
         return "DNS API."
 
     @router.route("/gethostbyname/<name>")
-    @twisted_async
     async def hostname(self, request, name):
         try:
             address = await getHostByName(name)
