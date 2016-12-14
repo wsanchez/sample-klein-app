@@ -6,6 +6,8 @@ from twisted.web import http
 
 from klein import Klein
 
+from ._main import main
+
 
 __all__ = ["Application"]
 
@@ -13,12 +15,7 @@ __all__ = ["Application"]
 class Application(object):
     router = Klein()
 
-    @staticmethod
-    def numberify(string):
-        if "." in string:
-            return float(string)
-        else:
-            return int(string)
+    main = classmethod(main)
 
     @router.route("/")
     def root(self, request):
@@ -45,7 +42,13 @@ class Application(object):
         request.setResponseCode(http.BAD_REQUEST)
         return "Invalid inputs provided."
 
+    @staticmethod
+    def numberify(string):
+        if "." in string:
+            return float(string)
+        else:
+            return int(string)
+
 
 if __name__ == "__main__":  # pragma: no cover
-    application = Application()
-    application.router.run("localhost", 8080)
+    Application.main()

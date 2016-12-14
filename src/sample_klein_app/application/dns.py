@@ -9,7 +9,10 @@ from twisted.internet.error import DNSLookupError
 from twisted.web import http
 from twisted.names.client import getHostByName
 from twisted.names.error import DNSNameError
+
 from klein import Klein
+
+from ._main import main
 
 
 __all__ = ["Application"]
@@ -27,6 +30,8 @@ def twisted_async(f):
 
 class Application(object):
     router = Klein()
+
+    main = classmethod(main)
 
     @router.route("/")
     def root(self, request):
@@ -48,5 +53,4 @@ class Application(object):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    application = Application()
-    application.router.run("localhost", 8080)
+    Application.main()

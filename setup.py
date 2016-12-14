@@ -54,13 +54,12 @@ entry_points = {
     "console_scripts": [],
 }
 
-script_entry_points = {
-    # "web": ("sample.tool", "Tool.main"),
-}
+klein_applications = ("composite", "dns", "hello", "math")
 
-for tool, (module, function) in script_entry_points.items():
+for app in klein_applications:
     entry_points["console_scripts"].append(
-        "{}_{} = {}:{}".format(name, tool, module, function)
+        "sample_{app} = sample_klein_app.application.{app}:Application.main"
+        .format(app=app)
     )
 
 

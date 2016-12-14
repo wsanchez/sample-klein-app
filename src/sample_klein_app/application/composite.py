@@ -7,6 +7,7 @@ from klein import Klein
 from .dns import Application as DNSApplication
 from .hello import Application as HelloApplication
 from .math import Application as MathApplication
+from ._main import main
 
 
 __all__ = ["Application"]
@@ -14,6 +15,8 @@ __all__ = ["Application"]
 
 class Application(object):
     router = Klein()
+
+    main = classmethod(main)
 
     @router.route("/")
     def root(self, request):
@@ -33,5 +36,4 @@ class Application(object):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    application = Application()
-    application.router.run("localhost", 8080)
+    Application.main()
