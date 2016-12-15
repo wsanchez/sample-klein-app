@@ -10,7 +10,9 @@ from .math import Application as MathApplication
 from ._main import main
 
 
-__all__ = ["Application"]
+__all__ = (
+    "Application",
+)
 
 
 class Application(object):

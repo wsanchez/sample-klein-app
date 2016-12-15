@@ -15,7 +15,9 @@ from klein import Klein
 from ._main import main
 
 
-__all__ = ["Application"]
+__all__ = (
+    "Application",
+)
 
 
 # Ideally, we want Klein to handle coroutines natively, so we won't need this

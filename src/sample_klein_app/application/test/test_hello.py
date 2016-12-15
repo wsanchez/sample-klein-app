@@ -9,7 +9,9 @@ from .mock_render import assertResponse
 from sample_klein_app.application.hello import Application
 
 
-__all__ = ["HelloApplicationTests"]
+__all__ = (
+    "HelloApplicationTests",
+)
 
 
 class HelloApplicationTests(unittest.TestCase):

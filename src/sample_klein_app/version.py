@@ -2,7 +2,9 @@
 Version information.
 """
 
-__all__ = ["version"]
+__all__ = (
+    "version",
+)
 
 
 version = "0"

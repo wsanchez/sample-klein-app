@@ -9,9 +9,10 @@ from twisted.web import http
 from klein.test.test_resource import requestMock as mock_request, _render
 
 
-__all__ = [
+__all__ = (
     "assertResponse",
-]
+    "render",
+)
 
 
 @inlineCallbacks

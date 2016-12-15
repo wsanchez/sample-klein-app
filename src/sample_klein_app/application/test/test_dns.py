@@ -14,7 +14,9 @@ from .mock_render import assertResponse
 from sample_klein_app.application.dns import Application
 
 
-__all__ = ["DNSApplicationTests"]
+__all__ = (
+    "DNSApplicationTests",
+)
 
 
 class DNSApplicationTests(unittest.TestCase):
