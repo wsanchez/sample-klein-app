@@ -7,7 +7,9 @@ from klein import Klein
 from ._main import main
 
 
-__all__ = ["Application"]
+__all__ = (
+    "Application",
+)
 
 
 class Application(object):

@@ -11,7 +11,9 @@ from .mock_render import assertResponse
 from sample_klein_app.application.composite import Application
 
 
-__all__ = ["CompositeApplicationTests"]
+__all__ = (
+    "CompositeApplicationTests",
+)
 
 
 class CompositeApplicationTests(unittest.TestCase):

@@ -10,7 +10,9 @@ from .mock_render import assertResponse
 from sample_klein_app.application.math import Application
 
 
-__all__ = ["MathApplicationTests"]
+__all__ = (
+    "MathApplicationTests",
+)
 
 
 class MathApplicationTests(unittest.TestCase):
