@@ -2,9 +2,6 @@
 DNS application
 """
 
-from functools import wraps
-
-from twisted.internet.defer import ensureDeferred
 from twisted.internet.error import DNSLookupError
 from twisted.web import http
 from twisted.names.client import getHostByName
