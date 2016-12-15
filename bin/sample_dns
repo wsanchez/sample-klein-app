@@ -1,0 +1,6 @@
+#!/bin/sh
+# -*- sh-basic-offset: 2 -*-
+
+. "$(dirname "$0")/develop";
+
+exec "${venv_command}" "$@";
