@@ -21,7 +21,7 @@ class CompositeApplicationTests(unittest.TestCase):
     Tests for L{sample_klein_app.application.composite}.
     """
 
-    async def assertResponse(self, *args, **kwargs):
+    async def assertResponse(self, *args, **kwargs) -> None:
         """
         Generate and process a request using the an instance of L{Application}
         and assert that the response is as expected.
@@ -36,7 +36,7 @@ class CompositeApplicationTests(unittest.TestCase):
         application = Application()
         await assertResponse(self, application, *args, **kwargs)
 
-    async def assertChildApplication(self, sub_app, *args, **kwargs):
+    async def assertChildApplication(self, sub_app, *args, **kwargs) -> None:
         """
         Assert that a child application is bound to a given name as a child
         resource of L{Application}.

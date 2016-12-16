@@ -21,7 +21,7 @@ class MathApplicationTests(unittest.TestCase):
     Tests for L{sample_klein_app.application.math}.
     """
 
-    async def assertResponse(self, *args, **kwargs):
+    async def assertResponse(self, *args, **kwargs) -> None:
         """
         Generate and process a request using the an instance of L{Application}
         and assert that the response is as expected.

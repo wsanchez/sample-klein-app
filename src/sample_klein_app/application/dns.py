@@ -5,7 +5,7 @@ DNS application
 from typing import Callable
 from functools import wraps
 
-from twisted.internet.defer import ensureDeferred
+from twisted.internet.defer import Deferred, ensureDeferred
 from twisted.internet.error import DNSLookupError
 from twisted.web import http
 from twisted.web.iweb import IRequest
@@ -25,7 +25,7 @@ __all__ = (
 # decorator.
 def twisted_async(f: Callable) -> Callable:
     @wraps(f)
-    def wrapper(*args, **kwargs):
+    def wrapper(*args, **kwargs) -> Deferred:
         result = f(*args, **kwargs)
         return ensureDeferred(result)
     return wrapper

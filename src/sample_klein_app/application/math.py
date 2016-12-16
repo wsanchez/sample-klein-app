@@ -2,6 +2,8 @@
 Math application
 """
 
+from typing import Union
+
 from twisted.web import http
 from twisted.web.iweb import IRequest
 
@@ -111,7 +113,7 @@ class Application(object):
         return "Invalid inputs provided."
 
     @staticmethod
-    def numberify(string):
+    def numberify(string: str) -> Union[int, float]:
         """
         Convert a string into a number.
 
