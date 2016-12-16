@@ -80,18 +80,18 @@ class CompositeApplicationTests(unittest.TestCase):
         """
         L{Application} responds with the DNS application at C{"/dns"}.
         """
-        return self.assertSubApplication(b"dns", response_data=b"DNS API.")
+        return self.assertChildApplication(b"dns", response_data=b"DNS API.")
 
     def test_hello(self):
         """
         L{Application} responds with the Hello application at C{"/hello"}.
         """
-        return self.assertSubApplication(b"hello", response_data=b"Hello!")
+        return self.assertChildApplication(b"hello", response_data=b"Hello!")
 
     def test_math(self):
         """
         L{Application} responds with the Math application at C{"/math"}.
         """
-        return self.assertSubApplication(
+        return self.assertChildApplication(
             b"math", response_data=b"Math happens here."
         )
