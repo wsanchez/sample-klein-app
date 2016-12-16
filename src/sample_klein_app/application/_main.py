@@ -3,9 +3,10 @@ Shared main function.
 """
 
 import sys
+from typing import Sequence
 
 
-def main(applicationClass, argv=sys.argv):
+def main(applicationClass, argv: Sequence[str] = sys.argv) -> None:
     """
     Executable entry point
 
