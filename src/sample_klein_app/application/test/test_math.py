@@ -10,7 +10,9 @@ from .mock_render import assertResponse
 from sample_klein_app.application.math import Application
 
 
-__all__ = ["MathApplicationTests"]
+__all__ = (
+    "MathApplicationTests",
+)
 
 
 class MathApplicationTests(unittest.TestCase):
@@ -19,6 +21,17 @@ class MathApplicationTests(unittest.TestCase):
     """
 
     def assertResponse(self, *args, **kwargs):
+        """
+        Generate and process a request using the an instance of L{Application}
+        and assert that the response is as expected.
+
+        @see L{assertResponse}
+
+        @param args: Positional arguments to pass to L{assertResponse}.
+            The C{application} argument is added as the first argument.
+
+        @param args: Keyword arguments to pass to L{assertResponse}.
+        """
         application = Application()
         return assertResponse(self, application, *args, **kwargs)
 

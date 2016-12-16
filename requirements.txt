@@ -1,9 +1,9 @@
 -e .  # Get self and dependencies from setup.py
 
     Twisted==16.6.0
-        zope.interface==4.3.2
+        zope.interface==4.3.3
 
-    # klein==15.3.1
+    # klein==16.12
     git+git://github.com/Twisted/klein.git@coroutines#egg=klein
         #twisted ...
         Werkzeug==0.11.11

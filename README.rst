@@ -23,6 +23,9 @@ This sample application attempts to demonstrate a few things:
     See hello.py_.
   * Using URL path components as arguments.
     See math.py_.
+  * Use of ``handle_errors`` to catch exceptions and respond with an
+    appropriate error.
+    See math.py_.
   * Composition of Klein applications.
     See composite.py_.
   * Using Twisted to write asynchronous code using ``async``/``await``.
