@@ -19,10 +19,25 @@ __all__ = (
 def assertResponse(
     test, application,
     request_path,
-    response_data=None,
     response_code=http.OK,
+    response_data=None,
     response_location_path=None,
 ):
+    """
+    Generate and process a request using the given application and assert
+    that the response is as expected.
+
+    @param application: The application to route the request to.
+
+    @param request_path: The path portion of the request URI.
+
+    @param response_code: The expected HTTP status code for the response.
+
+    @param response_data: The expected HTTP entity body data for the response.
+
+    @param response_location_path: The expected C{"Location"} HTTP header value
+        for the response.
+    """
     request = mock_request(request_path)
 
     yield render(application, request)
@@ -46,6 +61,13 @@ def assertResponse(
         test.assertEqual(path, response_location_path)
 
 
-def render(app, request, notifyFinish=True):
-    resource = app.router.resource()
-    return _render(resource, request, notifyFinish)
+def render(application, request):
+    """
+    Render a response from the given application for the given request.
+
+    @param application: The application to route the request to.
+
+    @param request: The request to route the request to the application.
+    """
+    resource = application.router.resource()
+    return _render(resource, request, notifyFinish=True)

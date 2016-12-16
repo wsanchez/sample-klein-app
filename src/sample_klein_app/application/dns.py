@@ -31,17 +31,40 @@ def twisted_async(f):
 
 
 class Application(object):
+    """
+    DNS application.
+
+    Application that performs DNS queries.
+    """
+
     router = Klein()
 
     main = classmethod(main)
 
     @router.route("/")
     def root(self, request):
+        """
+        Application root resource.
+
+        Responds with a message noting the nature of the application.
+
+        @param request: The request to respond to.
+        """
         return "DNS API."
 
     @router.route("/gethostbyname/<name>")
     @twisted_async
     async def hostname(self, request, name):
+        """
+        Hostname lookup resource.
+
+        Performs a lookup on the given name and responds with the resulting
+        address.
+
+        @param request: The request to respond to.
+
+        @param name: A host name.
+        """
         try:
             address = await getHostByName(name)
         except DNSNameError:
