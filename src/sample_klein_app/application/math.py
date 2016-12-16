@@ -15,6 +15,12 @@ __all__ = (
 
 
 class Application(object):
+    """
+    Math application.
+
+    Application performs some mathematical functions.
+    """
+
     router = Klein()
 
     main = classmethod(main)

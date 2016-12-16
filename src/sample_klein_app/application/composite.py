@@ -16,6 +16,13 @@ __all__ = (
 
 
 class Application(object):
+    """
+    Composite application.
+
+    Application that exposes endpoints that are handled by other applications,
+    thereby composing multiple applications into a single application.
+    """
+
     router = Klein()
 
     main = classmethod(main)

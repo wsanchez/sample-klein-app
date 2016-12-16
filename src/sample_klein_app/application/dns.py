@@ -31,6 +31,12 @@ def twisted_async(f):
 
 
 class Application(object):
+    """
+    DNS application.
+
+    Application that performs DNS queries.
+    """
+
     router = Klein()
 
     main = classmethod(main)

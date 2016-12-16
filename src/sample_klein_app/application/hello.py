@@ -13,6 +13,12 @@ __all__ = (
 
 
 class Application(object):
+    """
+    Hello application.
+
+    Application says hello.
+    """
+
     router = Klein()
 
     main = classmethod(main)
