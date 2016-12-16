@@ -16,7 +16,10 @@ install:
 matrix:
   include:
     - python: 3.5
-      env: TOXENV=lint-flake8,lint-mypy
+      env: TOXENV=lint-mypy
+
+    - python: 3.5
+      env: TOXENV=lint-flake8
 
     - python: 3.5
       env: TOXENV=py35-trial-coverage,codecov_publish
