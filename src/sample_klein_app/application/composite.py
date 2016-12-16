@@ -2,12 +2,13 @@
 Composite application
 """
 
-from klein import Klein
+from twisted.web.iweb import IRequest
 
+from ._main import main
+from .klein import Klein, KleinRenderable
 from .dns import Application as DNSApplication
 from .hello import Application as HelloApplication
 from .math import Application as MathApplication
-from ._main import main
 
 
 __all__ = (
@@ -25,10 +26,10 @@ class Application(object):
 
     router = Klein()
 
-    main = classmethod(main)
+    main = classmethod(main)  # type: ignore
 
     @router.route("/")
-    def root(self, request):
+    def root(self, request: IRequest):
         """
         Application root resource.
 
@@ -39,7 +40,7 @@ class Application(object):
         return "This is a web application composed from multiple applications."
 
     @router.route("/dns/", branch=True)
-    def dns(self, request):
+    def dns(self, request: IRequest):
         """
         DNS application resource.
 
@@ -50,7 +51,7 @@ class Application(object):
         return DNSApplication().router.resource()
 
     @router.route("/hello/", branch=True)
-    def hello(self, request):
+    def hello(self, request: IRequest):
         """
         Hello application resource.
 
@@ -61,7 +62,7 @@ class Application(object):
         return HelloApplication().router.resource()
 
     @router.route("/math/", branch=True)
-    def math(self, request):
+    def math(self, request: IRequest):
         """
         Math application resource.
 
@@ -73,4 +74,4 @@ class Application(object):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    Application.main()
+    Application.main()  # type: ignore

@@ -2,9 +2,10 @@
 Hello application
 """
 
-from klein import Klein
+from twisted.web.iweb import IRequest
 
 from ._main import main
+from .klein import Klein, KleinRenderable
 
 
 __all__ = (
@@ -21,10 +22,10 @@ class Application(object):
 
     router = Klein()
 
-    main = classmethod(main)
+    main = classmethod(main)  # type: ignore
 
     @router.route("/")
-    def hello(self, request):
+    def hello(self, request: IRequest) -> KleinRenderable:
         """
         Application root resource.
 
@@ -36,4 +37,4 @@ class Application(object):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    Application.main()
+    Application.main()  # type: ignore
