@@ -19,6 +19,13 @@ class Application(object):
 
     @router.route("/")
     def hello(self, request):
+        """
+        Application root resource.
+
+        Responds with a message noting the nature of the application.
+
+        @param request: The request to respond to.
+        """
         return "Hello!"
 
 
