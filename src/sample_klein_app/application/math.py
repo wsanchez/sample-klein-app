@@ -2,7 +2,7 @@
 Math application
 """
 
-from typing import Union, Iterable
+from typing import Union
 
 from twisted.web import http
 from twisted.web.iweb import IRequest
