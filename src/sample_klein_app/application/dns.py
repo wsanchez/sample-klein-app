@@ -3,7 +3,6 @@ DNS application
 """
 
 from typing import Callable
-from functools import wraps
 
 from twisted.internet.error import DNSLookupError
 from twisted.web import http
