@@ -5,8 +5,13 @@ Setuptools configuration
 """
 
 import sys
-from pathlib import Path
-from setuptools import setup, find_packages
+
+if sys.version_info < (3, 5, 0):
+    sys.stderr.write("ERROR: Python 3.5 or later is required.\n")
+    exit(1)
+
+from pathlib import Path  # noqa
+from setuptools import setup, find_packages  # noqa
 
 sys.path.insert(0, "src")
 

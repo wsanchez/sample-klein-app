@@ -2,14 +2,17 @@
 DNS application
 """
 
+from typing import Callable
+from functools import wraps
+
 from twisted.internet.error import DNSLookupError
 from twisted.web import http
+from twisted.web.iweb import IRequest
 from twisted.names.client import getHostByName
 from twisted.names.error import DNSNameError
 
-from klein import Klein
-
 from ._main import main
+from .klein import Klein, KleinRenderable
 
 
 __all__ = (
@@ -26,10 +29,10 @@ class Application(object):
 
     router = Klein()
 
-    main = classmethod(main)
+    main = classmethod(main)  # type: ignore
 
     @router.route("/")
-    def root(self, request):
+    def root(self, request: IRequest) -> KleinRenderable:
         """
         Application root resource.
 
@@ -40,7 +43,7 @@ class Application(object):
         return "DNS API."
 
     @router.route("/gethostbyname/<name>")
-    async def hostname(self, request, name):
+    async def hostname(self, request: IRequest, name: str) -> KleinRenderable:
         """
         Hostname lookup resource.
 
@@ -64,4 +67,4 @@ class Application(object):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    Application.main()
+    Application.main()  # type: ignore

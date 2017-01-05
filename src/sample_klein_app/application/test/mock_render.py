@@ -3,8 +3,8 @@ Tools for simulating resource rendering.
 """
 
 from twisted.python.url import URL
-from twisted.internet.defer import inlineCallbacks
 from twisted.web import http
+from twisted.web.iweb import IRequest
 
 from klein.test.test_resource import requestMock as mock_request, _render
 
@@ -15,14 +15,13 @@ __all__ = (
 )
 
 
-@inlineCallbacks
-def assertResponse(
+async def assertResponse(
     test, application,
-    request_path,
-    response_code=http.OK,
-    response_data=None,
-    response_location_path=None,
-):
+    request_path: str,
+    response_code: int = http.OK,
+    response_data: bytes = None,
+    response_location_path: str = None,
+) -> None:
     """
     Generate and process a request using the given application and assert
     that the response is as expected.
@@ -40,7 +39,7 @@ def assertResponse(
     """
     request = mock_request(request_path)
 
-    yield render(application, request)
+    await render(application, request)
 
     test.assertEqual(request.code, response_code)
 
@@ -61,7 +60,7 @@ def assertResponse(
         test.assertEqual(path, response_location_path)
 
 
-def render(application, request):
+async def render(application, request: IRequest) -> None:
     """
     Render a response from the given application for the given request.
 
@@ -70,4 +69,4 @@ def render(application, request):
     @param request: The request to route the request to the application.
     """
     resource = application.router.resource()
-    return _render(resource, request, notifyFinish=True)
+    await _render(resource, request, notifyFinish=True)

@@ -2,11 +2,13 @@
 Math application
 """
 
-from twisted.web import http
+from typing import Union
 
-from klein import Klein
+from twisted.web import http
+from twisted.web.iweb import IRequest
 
 from ._main import main
+from .klein import Klein, KleinRenderable
 
 
 __all__ = (
@@ -23,10 +25,10 @@ class Application(object):
 
     router = Klein()
 
-    main = classmethod(main)
+    main = classmethod(main)   # type: ignore
 
     @router.route("/")
-    def root(self, request):
+    def root(self, request: IRequest) -> KleinRenderable:
         """
         Application root resource.
 
@@ -37,7 +39,7 @@ class Application(object):
         return "Math happens here."
 
     @router.route("/add/<a>/<b>")
-    def add(self, request, a, b):
+    def add(self, request: IRequest, a: str, b: str) -> KleinRenderable:
         """
         Addition resource.
 
@@ -49,10 +51,11 @@ class Application(object):
 
         @param b: A number to add to C{a}.
         """
-        return "{}".format(self.numberify(a) + self.numberify(b))
+        x = self.numberify(a) + self.numberify(b)  # type: ignore #see #21
+        return "{}".format(x)
 
     @router.route("/subtract/<a>/<b>")
-    def subtract(self, request, a, b):
+    def subtract(self, request: IRequest, a: str, b: str) -> KleinRenderable:
         """
         Subtraction resource.
 
@@ -65,10 +68,11 @@ class Application(object):
 
         @param b: A number to subtract from C{a}.
         """
-        return "{}".format(self.numberify(a) - self.numberify(b))
+        x = self.numberify(a) - self.numberify(b)  # type: ignore #see #21
+        return "{}".format(x)
 
     @router.route("/multiply/<a>/<b>")
-    def multiply(self, request, a, b):
+    def multiply(self, request: IRequest, a: str, b: str) -> KleinRenderable:
         """
         Multiplication resource.
 
@@ -80,10 +84,11 @@ class Application(object):
 
         @param b: A number to multiply with C{a}.
         """
-        return "{}".format(self.numberify(a) * self.numberify(b))
+        x = self.numberify(a) * self.numberify(b)  # type: ignore #see #21
+        return "{}".format(x)
 
     @router.route("/divide/<a>/<b>")
-    def divide(self, request, a, b):
+    def divide(self, request: IRequest, a: str, b: str) -> KleinRenderable:
         """
         Division resource.
 
@@ -96,10 +101,11 @@ class Application(object):
 
         @param b: A number to divide C{a} by.
         """
-        return "{}".format(self.numberify(a) / self.numberify(b))
+        x = self.numberify(a) / self.numberify(b)  # type: ignore #see #21
+        return "{}".format(x)
 
     @router.handle_errors(ValueError)
-    def valueError(self, request, failure):
+    def valueError(self, request: IRequest, failure) -> KleinRenderable:
         """
         Error handler for L{ValueError}.
 
@@ -111,7 +117,7 @@ class Application(object):
         return "Invalid inputs provided."
 
     @staticmethod
-    def numberify(string):
+    def numberify(string: str) -> Union[int, float]:
         """
         Convert a string into a number.
 
@@ -124,4 +130,4 @@ class Application(object):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    Application.main()
+    Application.main()  # type: ignore
