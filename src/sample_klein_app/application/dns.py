@@ -2,8 +2,6 @@
 DNS application
 """
 
-from typing import Callable
-
 from twisted.internet.error import DNSLookupError
 from twisted.web import http
 from twisted.web.iweb import IRequest
