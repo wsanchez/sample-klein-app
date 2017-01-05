@@ -10,10 +10,10 @@ from twisted.web.iweb import IRenderable
 from klein import Klein
 
 
-__all__ = [
+__all__ = (
     "Klein",
     "KleinRenderable",
-]
+)
 
 
 # Expected return types for route methods
