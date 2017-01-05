@@ -3,6 +3,7 @@
     Twisted==16.6.0
         zope.interface==4.3.3
 
-    klein==16.12
+    # klein==16.12
+    git+git://github.com/Twisted/klein.git#egg=klein
         #twisted ...
-        Werkzeug==0.11.11
+        Werkzeug==0.11.15

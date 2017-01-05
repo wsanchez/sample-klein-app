@@ -2,10 +2,6 @@
 DNS application
 """
 
-from typing import Callable
-from functools import wraps
-
-from twisted.internet.defer import Deferred, ensureDeferred
 from twisted.internet.error import DNSLookupError
 from twisted.web import http
 from twisted.web.iweb import IRequest
@@ -19,16 +15,6 @@ from .klein import Klein, KleinRenderable
 __all__ = (
     "Application",
 )
-
-
-# Ideally, we want Klein to handle coroutines natively, so we won't need this
-# decorator.
-def twisted_async(f: Callable) -> Callable:
-    @wraps(f)
-    def wrapper(*args, **kwargs) -> Deferred:
-        result = f(*args, **kwargs)
-        return ensureDeferred(result)
-    return wrapper
 
 
 class Application(object):
@@ -54,7 +40,6 @@ class Application(object):
         return "DNS API."
 
     @router.route("/gethostbyname/<name>")
-    @twisted_async
     async def hostname(self, request: IRequest, name: str) -> KleinRenderable:
         """
         Hostname lookup resource.
