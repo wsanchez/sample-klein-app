@@ -2,8 +2,13 @@
 Tests for L{sample_klein_app.application.math}.
 """
 
+from math import isnan
+
 from twisted.web import http
 from twisted.trial import unittest
+
+from hypothesis import given
+from hypothesis.strategies import integers, floats
 
 from .async import defer_async
 from .mock_render import assertResponse
@@ -36,28 +41,31 @@ class MathApplicationTests(unittest.TestCase):
         application = Application()
         await assertResponse(self, application, *args, **kwargs)
 
-    def test_numberify_integer(self) -> None:
+    @given(integers())
+    def test_numberify_integer(self, integer_value: int) -> None:
         """
         L{Application.numberify} converts a string integer into an L{int}.
         """
-        for integer_value in (-1, 0, 1):
-            string_value = "{}".format(integer_value)
-            result_value = Application.numberify(string_value)
+        string_value = "{}".format(integer_value)
+        result_value = Application.numberify(string_value)
 
-            self.assertEqual(result_value, integer_value)
-            self.assertEqual(type(result_value), int)
+        self.assertEqual(result_value, integer_value)
+        self.assertEqual(type(result_value), int)
 
-    def test_numberify_float(self) -> None:
+    @given(floats())
+    def test_numberify_float(self, float_value: float) -> None:
         """
         L{Application.numberify} converts a string floating-point number into a
         L{float}.
         """
-        for float_value in (-1.0, 0.0, 1.0):
-            string_value = "{}".format(float_value)
-            result_value = Application.numberify(string_value)
+        string_value = "{}".format(float_value)
+        result_value = Application.numberify(string_value)
 
+        if isnan(float_value):
+            self.assertTrue(isnan(result_value))
+        else:
             self.assertEqual(result_value, float_value)
-            self.assertEqual(type(result_value), float)
+        self.assertEqual(type(result_value), float)
 
     @defer_async
     async def test_root(self) -> None:
