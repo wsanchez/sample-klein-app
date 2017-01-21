@@ -30,10 +30,10 @@ class TestCase(unittest.SynchronousTestCase):
         deferred = ensureDeferred(deferred)
         return unittest.TestCase.successResultOf(self, deferred)
 
-    def failureResultOf(self, deferred: Deferred, *expectedExceptionTypes):
-        """
-        Override L{unittest.SynchronousTestCase.failureResultOf} to enable
-        handling of coroutines as well as L{Deferred}s.
-        """
-        deferred = ensureDeferred(deferred)
-        return unittest.TestCase.failureResultOf(self, deferred)
+    # def failureResultOf(self, deferred: Deferred, *expectedExceptionTypes):
+    #     """
+    #     Override L{unittest.SynchronousTestCase.failureResultOf} to enable
+    #     handling of coroutines as well as L{Deferred}s.
+    #     """
+    #     deferred = ensureDeferred(deferred)
+    #     return unittest.TestCase.failureResultOf(self, deferred)
