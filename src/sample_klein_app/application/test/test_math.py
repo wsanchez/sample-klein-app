@@ -9,7 +9,6 @@ from twisted.web import http
 from hypothesis import given, assume
 from hypothesis.strategies import integers, floats
 
-from .async import defer_async
 from .mock_render import assertResponse
 from . import unittest
 
