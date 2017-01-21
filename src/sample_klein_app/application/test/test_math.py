@@ -2,10 +2,14 @@
 Tests for L{sample_klein_app.application.math}.
 """
 
-from twisted.web import http
-from twisted.trial import unittest
+from math import isnan
 
-from .async import defer_async
+from twisted.web import http
+
+from hypothesis import given, assume
+from hypothesis.strategies import integers, floats
+
+from . import unittest
 from .mock_render import assertResponse
 
 from sample_klein_app.application.math import Application
@@ -21,7 +25,7 @@ class MathApplicationTests(unittest.TestCase):
     Tests for L{sample_klein_app.application.math}.
     """
 
-    async def assertResponse(self, *args, **kwargs) -> None:
+    def assertResponse(self, *args, **kwargs) -> None:
         """
         Generate and process a request using the an instance of L{Application}
         and assert that the response is as expected.
@@ -33,73 +37,88 @@ class MathApplicationTests(unittest.TestCase):
 
         @param args: Keyword arguments to pass to L{assertResponse}.
         """
-        application = Application()
-        await assertResponse(self, application, *args, **kwargs)
+        self.successResultOf(
+            assertResponse(self, Application(), *args, **kwargs)
+        )
 
-    def test_numberify_integer(self) -> None:
+    @given(integers())
+    def test_numberify_integer(self, integer_value: int) -> None:
         """
         L{Application.numberify} converts a string integer into an L{int}.
         """
-        for integer_value in (-1, 0, 1):
-            string_value = "{}".format(integer_value)
-            result_value = Application.numberify(string_value)
+        string_value = "{}".format(integer_value)
+        result_value = Application.numberify(string_value)
 
-            self.assertEqual(result_value, integer_value)
-            self.assertEqual(type(result_value), int)
+        self.assertEqual(result_value, integer_value)
+        self.assertEqual(type(result_value), int)
 
-    def test_numberify_float(self) -> None:
+    @given(floats(allow_nan=True, allow_infinity=True))
+    def test_numberify_float(self, float_value: float) -> None:
         """
         L{Application.numberify} converts a string floating-point number into a
         L{float}.
         """
-        for float_value in (-1.0, 0.0, 1.0):
-            string_value = "{}".format(float_value)
-            result_value = Application.numberify(string_value)
+        string_value = "{}".format(float_value)
+        result_value = Application.numberify(string_value)
 
+        if isnan(float_value):
+            self.assertTrue(isnan(result_value))
+        else:
             self.assertEqual(result_value, float_value)
-            self.assertEqual(type(result_value), float)
+        self.assertEqual(type(result_value), float)
 
-    @defer_async
-    async def test_root(self) -> None:
+    def test_root(self) -> None:
         """
         L{Application.root} returns a canned string.
         """
-        await self.assertResponse(b"/", response_data=b"Math happens here.")
+        self.assertResponse(b"/", response_data=b"Math happens here.")
 
-    @defer_async
-    async def test_add(self) -> None:
+    @given(integers(), integers())
+    def test_add(self, x: int, y: int) -> None:
         """
         L{Application.add} sums C{a} and C{b}.
         """
-        await self.assertResponse(b"/add/1/3", response_data=b"4")
+        self.assertResponse(
+            "/add/{}/{}".format(x, y).encode("ascii"),
+            response_data=str(x + y).encode("ascii"),
+        )
 
-    @defer_async
-    async def test_subtract(self) -> None:
+    @given(integers(), integers())
+    def test_subtract(self, x: int, y: int) -> None:
         """
         L{Application.subtract} subtracts C{b} from C{a}.
         """
-        await self.assertResponse(b"/subtract/4/1", response_data=b"3")
+        self.assertResponse(
+            "/subtract/{}/{}".format(x, y).encode("ascii"),
+            response_data=str(x - y).encode("ascii")
+        )
 
-    @defer_async
-    async def test_multiply(self) -> None:
+    @given(integers(), integers())
+    def test_multiply(self, x: int, y: int) -> None:
         """
         L{Application.multiply} multiplies C{a} and C{b}.
         """
-        await self.assertResponse(b"/multiply/2/3", response_data=b"6")
+        self.assertResponse(
+            "/multiply/{}/{}".format(x, y).encode("ascii"),
+            response_data=str(x * y).encode("ascii")
+        )
 
-    @defer_async
-    async def test_divide(self) -> None:
+    @given(integers(), integers())
+    def test_divide(self, x: int, y: int) -> None:
         """
         L{Application.divide} divides C{a} by C{b}.
         """
-        await self.assertResponse(b"/divide/12/3", response_data=b"4.0")
+        assume(y != 0)  # Avoid division by zero
+        self.assertResponse(
+            "/divide/{}/{}".format(x, y).encode("ascii"),
+            response_data=str(x / y).encode("ascii")
+        )
 
-    @defer_async
-    async def test_invalid_input(self) -> None:
+    def test_invalid_input(self) -> None:
         """
         Invalid inputs result in an error.
         """
-        await self.assertResponse(
+        self.assertResponse(
             b"/divide/fish/carrots",
             response_data=b"Invalid inputs provided.",
             response_code=http.BAD_REQUEST,

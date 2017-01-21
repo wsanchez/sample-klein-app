@@ -123,10 +123,10 @@ class Application(object):
 
         @param string: A string to convert into a number.
         """
-        if "." in string:
-            return float(string)
-        else:
+        try:
             return int(string)
+        except ValueError:
+            return float(string)
 
 
 if __name__ == "__main__":  # pragma: no cover
