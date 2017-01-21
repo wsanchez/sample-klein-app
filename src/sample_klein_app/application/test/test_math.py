@@ -52,7 +52,7 @@ class MathApplicationTests(unittest.TestCase):
         self.assertEqual(result_value, integer_value)
         self.assertEqual(type(result_value), int)
 
-    @given(floats())
+    @given(floats(allow_nan=True, allow_infinity=True))
     def test_numberify_float(self, float_value: float) -> None:
         """
         L{Application.numberify} converts a string floating-point number into a
