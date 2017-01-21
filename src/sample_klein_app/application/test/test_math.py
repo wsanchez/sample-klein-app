@@ -9,8 +9,8 @@ from twisted.web import http
 from hypothesis import given, assume
 from hypothesis.strategies import integers, floats
 
-from .mock_render import assertResponse
 from . import unittest
+from .mock_render import assertResponse
 
 from sample_klein_app.application.math import Application
 
@@ -37,9 +37,8 @@ class MathApplicationTests(unittest.TestCase):
 
         @param args: Keyword arguments to pass to L{assertResponse}.
         """
-        application = Application()
         self.successResultOf(
-            assertResponse(self, application, *args, **kwargs)
+            assertResponse(self, Application(), *args, **kwargs)
         )
 
     @given(integers())
