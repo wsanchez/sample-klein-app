@@ -22,7 +22,11 @@ matrix:
       env: TOXENV=mypy
 
     - python: 3.5
-      env: TOXENV=py35-trial-coverage,codecov_publish
+      env: TOXENV=py35-coverage
 
 script:
   - tox
+
+after_success:
+  - coverage_combine
+  - coverage_codecov
