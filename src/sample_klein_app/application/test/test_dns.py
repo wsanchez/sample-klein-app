@@ -9,8 +9,8 @@ from twisted.web import http
 
 from . import unittest
 from .mock_render import assertResponse
+from .. import dns
 from ..dns import Application
-from ...application import dns
 
 
 __all__ = (
