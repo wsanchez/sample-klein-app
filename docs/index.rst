@@ -5,6 +5,8 @@ Sample Klein Application
    :maxdepth: 2
    :caption: Contents:
 
+   sample_klein_app
+   modules
 
 
 Indices and tables
