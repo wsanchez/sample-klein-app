@@ -6,7 +6,6 @@ Sample Klein Application
    :caption: Contents:
 
    sample_klein_app
-   modules
 
 
 Indices and tables
