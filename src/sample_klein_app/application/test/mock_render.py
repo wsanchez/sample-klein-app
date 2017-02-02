@@ -6,7 +6,7 @@ from twisted.python.url import URL
 from twisted.web import http
 from twisted.web.iweb import IRequest
 
-from klein.test.test_resource import requestMock as mock_request, _render
+from klein.test.test_resource import _render, requestMock as mock_request
 
 
 __all__ = (

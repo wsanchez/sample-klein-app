@@ -4,15 +4,14 @@ Tests for L{sample_klein_app.application.math}.
 
 from math import isnan
 
-from twisted.web import http
+from hypothesis import assume, given
+from hypothesis.strategies import floats, integers
 
-from hypothesis import given, assume
-from hypothesis.strategies import integers, floats
+from twisted.web import http
 
 from . import unittest
 from .mock_render import assertResponse
-
-from sample_klein_app.application.math import Application
+from ..math import Application
 
 
 __all__ = (

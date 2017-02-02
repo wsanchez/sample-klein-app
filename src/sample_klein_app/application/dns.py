@@ -3,10 +3,10 @@ DNS application
 """
 
 from twisted.internet.error import DNSLookupError
-from twisted.web import http
-from twisted.web.iweb import IRequest
 from twisted.names.client import getHostByName
 from twisted.names.error import DNSNameError
+from twisted.web import http
+from twisted.web.iweb import IRequest
 
 from ._main import main
 from .klein import Klein, KleinRenderable

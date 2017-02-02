@@ -6,8 +6,7 @@ from twisted.web import http
 
 from . import unittest
 from .mock_render import assertResponse
-
-from sample_klein_app.application.composite import Application
+from ..application.composite import Application
 
 
 __all__ = (

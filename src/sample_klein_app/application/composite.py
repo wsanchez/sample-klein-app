@@ -5,9 +5,9 @@ Composite application
 from twisted.web.iweb import IRequest
 
 from ._main import main
-from .klein import Klein, KleinRenderable
 from .dns import Application as DNSApplication
 from .hello import Application as HelloApplication
+from .klein import Klein, KleinRenderable
 from .math import Application as MathApplication
 
 

@@ -2,16 +2,15 @@
 Tests for L{sample_klein_app.application.dns}.
 """
 
-from twisted.internet.defer import Deferred, succeed, fail
+from twisted.internet.defer import Deferred, fail, succeed
 from twisted.internet.error import DNSLookupError
-from twisted.web import http
 from twisted.names.error import DNSNameError
+from twisted.web import http
 
-from ...application import dns
 from . import unittest
 from .mock_render import assertResponse
-
-from sample_klein_app.application.dns import Application
+from ..dns import Application
+from ...application import dns
 
 
 __all__ = (
