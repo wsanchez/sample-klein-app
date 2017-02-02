@@ -4,8 +4,8 @@ Klein additions.
 
 from typing import Union
 
-from twisted.web.resource import IResource
 from twisted.web.iweb import IRenderable
+from twisted.web.resource import IResource
 
 from klein import Klein
 

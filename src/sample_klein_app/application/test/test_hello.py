@@ -4,8 +4,7 @@ Tests for L{sample_klein_app.application.hello}.
 
 from . import unittest
 from .mock_render import assertResponse
-
-from sample_klein_app.application.hello import Application
+from ..hello import Application
 
 
 __all__ = (
