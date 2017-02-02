@@ -16,10 +16,7 @@ install:
 matrix:
   include:
     - python: 3.5
-      env: TOXENV=flake8
-
-    - python: 3.5
-      env: TOXENV=mypy
+      env: TOXENV=flake8,mypy
 
     - python: 3.5
       env: TOXENV=py35-coverage
