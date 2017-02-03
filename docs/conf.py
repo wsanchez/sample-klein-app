@@ -8,8 +8,8 @@ author = u"Wilfredo S\xe1nchez Vega"
 
 # File names
 
-templates_path = ["templates"]
-html_static_path = ["static"]
+templates_path = []
+html_static_path = []
 source_suffix = [".rst", ".md"]
 master_doc = "index"
 exclude_patterns = []
