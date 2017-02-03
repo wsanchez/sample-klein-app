@@ -10,9 +10,9 @@ def main(applicationClass, argv: Sequence[str] = None) -> None:
     """
     Executable entry point
 
-    @param applicationClass: A Klein application to run.
+    :param applicationClass: A Klein application to run.
 
-    @param argv: Command line arguments.  If C{None}, use L{sys.argv}.
+    :param argv: Command line arguments.  If :obj:`None`, use :data:`sys.argv`.
     """
     if argv is None:
         argv = sys.argv
