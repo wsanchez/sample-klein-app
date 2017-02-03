@@ -1,3 +1,3 @@
 """
-Tests for L{sample_klein_app.application}.
+Tests for :mod:`sample_klein_app.application`.
 """

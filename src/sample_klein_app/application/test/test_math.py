@@ -1,5 +1,5 @@
 """
-Tests for L{sample_klein_app.application.math}.
+Tests for :mod:`sample_klein_app.application.math`.
 """
 
 from math import isnan
@@ -21,20 +21,20 @@ __all__ = (
 
 class MathApplicationTests(unittest.TestCase):
     """
-    Tests for L{sample_klein_app.application.math}.
+    Tests for :mod:`sample_klein_app.application.math`.
     """
 
     def assertResponse(self, *args, **kwargs) -> None:
         """
-        Generate and process a request using the an instance of L{Application}
-        and assert that the response is as expected.
+        Generate and process a request using the an instance of
+        :class:`.math.Application` and assert that the response is as expected.
 
-        @see L{assertResponse}
+        See :meth:`assertResponse`.
 
-        @param args: Positional arguments to pass to L{assertResponse}.
-            The C{application} argument is added as the first argument.
+        :param args: Positional arguments to pass to :meth:`assertResponse`.
+            The ``application`` argument is added as the first argument.
 
-        @param args: Keyword arguments to pass to L{assertResponse}.
+        :param args: Keyword arguments to pass to :meth:`assertResponse`.
         """
         self.successResultOf(
             assertResponse(self, Application(), *args, **kwargs)
@@ -43,7 +43,8 @@ class MathApplicationTests(unittest.TestCase):
     @given(integers())
     def test_numberify_integer(self, integer_value: int) -> None:
         """
-        L{Application.numberify} converts a string integer into an L{int}.
+        :meth:`.math.Application.numberify` converts a string integer into an
+        :class:`int`.
         """
         string_value = "{}".format(integer_value)
         result_value = Application.numberify(string_value)
@@ -54,8 +55,8 @@ class MathApplicationTests(unittest.TestCase):
     @given(floats(allow_nan=True, allow_infinity=True))
     def test_numberify_float(self, float_value: float) -> None:
         """
-        L{Application.numberify} converts a string floating-point number into a
-        L{float}.
+        :meth:`.math.Application.numberify` converts a string floating-point
+        number into a :class:`float`.
         """
         string_value = "{}".format(float_value)
         result_value = Application.numberify(string_value)
@@ -68,14 +69,14 @@ class MathApplicationTests(unittest.TestCase):
 
     def test_root(self) -> None:
         """
-        L{Application.root} returns a canned string.
+        :meth:`.math.Application.root` returns a canned string.
         """
         self.assertResponse(b"/", response_data=b"Math happens here.")
 
     @given(integers(), integers())
     def test_add(self, x: int, y: int) -> None:
         """
-        L{Application.add} sums C{a} and C{b}.
+        :meth:`.math.Application.add` sums ``a`` and ``b``.
         """
         self.assertResponse(
             "/add/{}/{}".format(x, y).encode("ascii"),
@@ -85,7 +86,7 @@ class MathApplicationTests(unittest.TestCase):
     @given(integers(), integers())
     def test_subtract(self, x: int, y: int) -> None:
         """
-        L{Application.subtract} subtracts C{b} from C{a}.
+        :meth:`.math.Application.subtract` subtracts ``b`` from ``a``.
         """
         self.assertResponse(
             "/subtract/{}/{}".format(x, y).encode("ascii"),
@@ -95,7 +96,7 @@ class MathApplicationTests(unittest.TestCase):
     @given(integers(), integers())
     def test_multiply(self, x: int, y: int) -> None:
         """
-        L{Application.multiply} multiplies C{a} and C{b}.
+        :meth:`.math.Application.multiply` multiplies ``a`` and ``b``.
         """
         self.assertResponse(
             "/multiply/{}/{}".format(x, y).encode("ascii"),
@@ -105,7 +106,7 @@ class MathApplicationTests(unittest.TestCase):
     @given(integers(), integers())
     def test_divide(self, x: int, y: int) -> None:
         """
-        L{Application.divide} divides C{a} by C{b}.
+        :meth:`.math.Application.divide` divides ``a`` by ``b``.
         """
         assume(y != 0)  # Avoid division by zero
         self.assertResponse(

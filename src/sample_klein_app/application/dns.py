@@ -35,7 +35,7 @@ class Application(object):
 
         Responds with a message noting the nature of the application.
 
-        @param request: The request to respond to.
+        :param request: The request to respond to.
         """
         return "DNS API."
 
@@ -47,9 +47,9 @@ class Application(object):
         Performs a lookup on the given name and responds with the resulting
         address.
 
-        @param request: The request to respond to.
+        :param request: The request to respond to.
 
-        @param name: A host name.
+        :param name: A host name.
         """
         try:
             address = await getHostByName(name)

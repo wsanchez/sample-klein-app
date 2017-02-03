@@ -35,7 +35,7 @@ class Application(object):
 
         Responds with a message noting the nature of the application.
 
-        @param request: The request to respond to.
+        :param request: The request to respond to.
         """
         return "This is a web application composed from multiple applications."
 
@@ -44,9 +44,9 @@ class Application(object):
         """
         DNS application resource.
 
-        Routes requests to L{DNSApplication}.
+        Routes requests to :class:`.dns.Application`.
 
-        @param request: The request to respond to.
+        :param request: The request to respond to.
         """
         return DNSApplication().router.resource()
 
@@ -55,9 +55,9 @@ class Application(object):
         """
         Hello application resource.
 
-        Routes requests to L{HelloApplication}.
+        Routes requests to :class:`.hello.Application`.
 
-        @param request: The request to respond to.
+        :param request: The request to respond to.
         """
         return HelloApplication().router.resource()
 
@@ -66,9 +66,9 @@ class Application(object):
         """
         Math application resource.
 
-        Routes requests to L{MathApplication}.
+        Routes requests to :class:`.math.Application`.
 
-        @param request: The request to respond to.
+        :param request: The request to respond to.
         """
         return MathApplication().router.resource()
 

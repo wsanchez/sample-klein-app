@@ -34,7 +34,7 @@ class Application(object):
 
         Responds with a message noting the nature of the application.
 
-        @param request: The request to respond to.
+        :param request: The request to respond to.
         """
         return "Math happens here."
 
@@ -45,11 +45,11 @@ class Application(object):
 
         Adds the two given numbers and responds with the result.
 
-        @param request: The request to respond to.
+        :param request: The request to respond to.
 
-        @param a: A number to add to C{b}.
+        :param a: A number to add to ``b``.
 
-        @param b: A number to add to C{a}.
+        :param b: A number to add to ``a``.
         """
         x = self.numberify(a) + self.numberify(b)  # type: ignore #see #21
         return "{}".format(x)
@@ -62,11 +62,11 @@ class Application(object):
         Subtracts one of two given numbers from the other and responds with the
         result.
 
-        @param request: The request to respond to.
+        :param request: The request to respond to.
 
-        @param a: A number to subtract C{b} from.
+        :param a: A number to subtract ``b`` from.
 
-        @param b: A number to subtract from C{a}.
+        :param b: A number to subtract from ``a``.
         """
         x = self.numberify(a) - self.numberify(b)  # type: ignore #see #21
         return "{}".format(x)
@@ -78,11 +78,11 @@ class Application(object):
 
         Multiplies the two given numbers and responds with the result.
 
-        @param request: The request to respond to.
+        :param request: The request to respond to.
 
-        @param a: A number to multiply with C{b}.
+        :param a: A number to multiply with ``b``.
 
-        @param b: A number to multiply with C{a}.
+        :param b: A number to multiply with ``a``.
         """
         x = self.numberify(a) * self.numberify(b)  # type: ignore #see #21
         return "{}".format(x)
@@ -95,11 +95,11 @@ class Application(object):
         Divides one of two given numbers from the other and responds with the
         result.
 
-        @param request: The request to respond to.
+        :param request: The request to respond to.
 
-        @param a: A number to divide by C{b}.
+        :param a: A number to divide by ``b``.
 
-        @param b: A number to divide C{a} by.
+        :param b: A number to divide ``a`` by.
         """
         x = self.numberify(a) / self.numberify(b)  # type: ignore #see #21
         return "{}".format(x)
@@ -107,11 +107,11 @@ class Application(object):
     @router.handle_errors(ValueError)
     def valueError(self, request: IRequest, failure) -> KleinRenderable:
         """
-        Error handler for L{ValueError}.
+        Error handler for :exc:`ValueError`.
 
-        @param request: The request to respond to.
+        :param request: The request to respond to.
 
-        @param failure: The failure that occurred.
+        :param failure: The failure that occurred.
         """
         request.setResponseCode(http.BAD_REQUEST)
         return "Invalid inputs provided."
@@ -121,7 +121,7 @@ class Application(object):
         """
         Convert a string into a number.
 
-        @param string: A string to convert into a number.
+        :param string: A string to convert into a number.
         """
         try:
             return int(string)

@@ -109,17 +109,11 @@ venv_init () {
 
   echo "Installing Tox...";
   "${python}" -m pip install --upgrade tox;
-
-  echo "Installing mock...";
-  "${python}" -m pip install --upgrade mock;
-
-  echo "Installing Hypothesis...";
-  "${python}" -m pip install --upgrade hypothesis;
 }
 
 venv_install_requirements () {
   echo "Installing required packages...";
-  "${python}" -m pip install --requirement "${wd}/requirements.txt";
+  "${python}" -m pip install --requirement "${wd}/requirements-dev.txt";
 }
 
 

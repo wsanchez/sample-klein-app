@@ -31,7 +31,7 @@ class Application(object):
 
         Responds with a message noting the nature of the application.
 
-        @param request: The request to respond to.
+        :param request: The request to respond to.
         """
         return "Hello!"
 

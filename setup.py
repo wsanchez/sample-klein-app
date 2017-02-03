@@ -95,7 +95,7 @@ extensions = []
 
 def main():
     """
-    Run L{setup}.
+    Run :func:`setup`.
     """
     setup(
         name=name,
