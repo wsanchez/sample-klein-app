@@ -62,7 +62,8 @@ class DNSApplicationTests(unittest.TestCase):
     def test_hostname_not_found(self) -> None:
         """
         :meth:`.dns.Application.hostname` responds with a
-        :const:`http.NOT_FOUND` error if the host is not found in DNS.
+        :const:`twisted.web.http.NOT_FOUND` error if the host is not found in
+        DNS.
         """
         def getHostByName(*args, **kwargs) -> Deferred:
             return fail(DNSNameError())
@@ -78,7 +79,8 @@ class DNSApplicationTests(unittest.TestCase):
     def test_hostname_lookup_error(self) -> None:
         """
         :meth:`.dns.Application.hostname` responds with a
-        :const:`http.NOT_FOUND` error if there is a DNS lookup error.
+        :const:`twisted.web.http.NOT_FOUND` error if there is a DNS lookup
+        error.
         """
         def getHostByName(*args, **kwargs) -> Deferred:
             return fail(DNSLookupError())
