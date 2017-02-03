@@ -17,3 +17,16 @@ exclude_patterns = []
 # Styling
 
 html_theme = "sphinx_rtd_theme"
+
+# Pedantry
+
+nitpick_ignore = [
+    # Bugs in Python documentation
+    ("py:class", "float"     ),
+    ("py:class", "int"       ),
+    ("py:class", "object"    ),
+    ("py:class", "Union"     ),
+    ("py:data" , "sys.argv"  ),
+    ("py:exc"  , "ValueError"),
+    ("py:obj"  , "None"      ),
+]
