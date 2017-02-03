@@ -44,7 +44,7 @@ class Application(object):
         """
         DNS application resource.
 
-        Routes requests to :class:`DNSApplication`.
+        Routes requests to :class:`.dns.Application`.
 
         :param request: The request to respond to.
         """
@@ -55,7 +55,7 @@ class Application(object):
         """
         Hello application resource.
 
-        Routes requests to :class:`HelloApplication`.
+        Routes requests to :class:`.hello.Application`.
 
         :param request: The request to respond to.
         """
@@ -66,7 +66,7 @@ class Application(object):
         """
         Math application resource.
 
-        Routes requests to :class:`MathApplication`.
+        Routes requests to :class:`.math.Application`.
 
         :param request: The request to respond to.
         """

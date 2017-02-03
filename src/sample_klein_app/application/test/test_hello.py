@@ -20,7 +20,7 @@ class HelloApplicationTests(unittest.TestCase):
     def assertResponse(self, *args, **kwargs) -> None:
         """
         Generate and process a request using the an instance of
-        :class:`Application` and assert that the response is as expected.
+        :class:`.hello.Application` and assert that the response is as expected.
 
         See :meth:`assertResponse`.
 
@@ -33,8 +33,8 @@ class HelloApplicationTests(unittest.TestCase):
             assertResponse(self, Application(), *args, **kwargs)
         )
 
-    def test_root(self) -> None:
+    def test_hello(self) -> None:
         """
-        :meth:`Application.root` returns a canned string.
+        :meth:`.hello.Application.hello` returns a canned string.
         """
         self.assertResponse(b"/", response_data=b"Hello!")

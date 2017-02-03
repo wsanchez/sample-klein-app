@@ -22,7 +22,8 @@ class CompositeApplicationTests(unittest.TestCase):
     def assertResponse(self, *args, **kwargs) -> None:
         """
         Generate and process a request using the an instance of
-        :class:`Application` and assert that the response is as expected.
+        :class:`.composite.Application` and assert that the response is as
+        expected.
 
         See :meth:`assertResponse`.
 
@@ -38,7 +39,7 @@ class CompositeApplicationTests(unittest.TestCase):
     def assertChildApplication(self, sub_app, *args, **kwargs) -> None:
         """
         Assert that a child application is bound to a given name as a child
-        resource of :class:`Application`.
+        resource of :class:`.composite.Application`.
 
         See :meth:`assertResponse`.
 
@@ -66,7 +67,7 @@ class CompositeApplicationTests(unittest.TestCase):
 
     def test_root(self) -> None:
         """
-        :meth:`Application.root` responds with a canned string.
+        :meth:`.composite.Application.root` responds with a canned string.
         """
         self.assertResponse(
             b"/",
@@ -78,19 +79,22 @@ class CompositeApplicationTests(unittest.TestCase):
 
     def test_dns(self) -> None:
         """
-        :class:`Application` responds with the DNS application at ``/dns``.
+        :class:`.composite.Application` responds with the DNS application at
+        ``/dns``.
         """
         self.assertChildApplication(b"dns", response_data=b"DNS API.")
 
     def test_hello(self) -> None:
         """
-        :class:`Application` responds with the Hello application at ``/hello``.
+        :class:`.composite.Application` responds with the Hello application at
+        ``/hello``.
         """
         self.assertChildApplication(b"hello", response_data=b"Hello!")
 
     def test_math(self) -> None:
         """
-        :class:`Application` responds with the Math application at ``/math``.
+        :class:`.composite.Application` responds with the Math application at
+        ``/math``.
         """
         self.assertChildApplication(
             b"math", response_data=b"Math happens here."

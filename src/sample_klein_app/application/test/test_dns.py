@@ -26,7 +26,7 @@ class DNSApplicationTests(unittest.TestCase):
     def assertResponse(self, *args, **kwargs) -> None:
         """
         Generate and process a request using the an instance of
-        :class:`Application` and assert that the response is as expected.
+        :class:`.dns.Application` and assert that the response is as expected.
 
         See :meth:`assertResponse`.
 
@@ -41,14 +41,14 @@ class DNSApplicationTests(unittest.TestCase):
 
     def test_root(self) -> None:
         """
-        :meth:`Application.root` returns a canned string.
+        :meth:`.dns.Application.root` returns a canned string.
         """
         self.assertResponse(b"/", response_data=b"DNS API.")
 
     def test_hostname_found(self) -> None:
         """
-        :meth:`Application.hostname` looks up the given name and provides an IP
-        address.
+        :meth:`.dns.Application.hostname` looks up the given name and provides
+        an IP address.
         """
         def getHostByName(*args, **kwargs) -> Deferred:
             return succeed("10.10.30.40")
@@ -61,8 +61,8 @@ class DNSApplicationTests(unittest.TestCase):
 
     def test_hostname_not_found(self) -> None:
         """
-        :meth:`Application.hostname` responds with a :const:`http.NOT_FOUND`
-        error if the host is not found in DNS.
+        :meth:`.dns.Application.hostname` responds with a
+        :const:`http.NOT_FOUND` error if the host is not found in DNS.
         """
         def getHostByName(*args, **kwargs) -> Deferred:
             return fail(DNSNameError())
@@ -77,8 +77,8 @@ class DNSApplicationTests(unittest.TestCase):
 
     def test_hostname_lookup_error(self) -> None:
         """
-        :meth:`Application.hostname` responds with a :const:`http.NOT_FOUND`
-        error if there is a DNS lookup error.
+        :meth:`.dns.Application.hostname` responds with a
+        :const:`http.NOT_FOUND` error if there is a DNS lookup error.
         """
         def getHostByName(*args, **kwargs) -> Deferred:
             return fail(DNSLookupError())
