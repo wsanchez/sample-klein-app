@@ -16,6 +16,7 @@ __all__ = (
 )
 
 
+
 class Application(object):
     """
     Composite application.
