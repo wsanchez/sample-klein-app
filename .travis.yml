@@ -34,7 +34,7 @@ matrix:
       env: TOXENV=py37-coverage,codecov
 
   allow_failures:
-    - env: TOX_ENV=py37-coverage,codecov
+    - env: TOXENV=py37-coverage,codecov
 
 script:
   - tox
