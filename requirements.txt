@@ -1,5 +1,7 @@
 -e .  # Get self and dependencies from setup.py
 
+    attrs
+
     Twisted==16.6.0
         zope.interface==4.3.3
 

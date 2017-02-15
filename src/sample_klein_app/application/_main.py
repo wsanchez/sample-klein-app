@@ -14,4 +14,4 @@ def main(applicationClass, argv: Sequence[str] = None) -> None:
     :param argv: Command line arguments.  If :obj:`None`, use :data:`sys.argv`.
     """
     application = applicationClass()
-    application.router.run("localhost", 8080)
+    application.router.run(host="localhost", port=8080)
