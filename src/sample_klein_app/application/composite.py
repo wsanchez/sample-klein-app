@@ -1,3 +1,4 @@
+# -*- test-case-name: sample_klein_app.application.test.test_composite -*-
 """
 Composite application
 """

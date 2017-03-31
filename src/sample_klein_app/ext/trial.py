@@ -1,3 +1,4 @@
+# -*- test-case-name: sample_klein_app.ext.test.test_trial -*-
 """
 Extensions to :mod:`twisted.trial`
 """

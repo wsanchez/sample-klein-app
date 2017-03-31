@@ -1,3 +1,4 @@
+# -*- test-case-name: sample_klein_app.ext.test.test_json -*-
 """
 Extensions to :mod:`json`
 """
