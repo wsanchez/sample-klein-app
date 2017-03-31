@@ -1,0 +1,23 @@
+#!/bin/sh
+
+#
+# Work around bug in twistedchecker where it exists with a non-zero exit status
+# even if it doesn't emit any warnings.
+#
+
+set -e
+set -u
+
+tmp="$(mktemp -t mypy.XXXX)";
+
+twistedchecker "$@" 2>&1 | tee "${tmp}";
+status=$?;
+
+cat "${tmp}";
+
+if [ ! -s "${tmp}" ]; then
+    # No warnings means no error
+    status=0;
+fi;
+
+exit ${status};
