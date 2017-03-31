@@ -1,5 +1,5 @@
 """
-Tests for :mod:`config_service.util.json`
+Tests for :mod:`sample-klein-app.ext.json`
 """
 
 from datetime import (
