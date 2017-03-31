@@ -9,7 +9,7 @@ from twisted.web import http
 from twisted.web.iweb import IRequest
 
 from ._main import main
-from .klein import Klein, KleinRenderable
+from ..ext.klein import Klein, KleinRenderable
 
 
 __all__ = (

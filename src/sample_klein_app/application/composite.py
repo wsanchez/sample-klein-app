@@ -7,8 +7,8 @@ from twisted.web.iweb import IRequest
 from ._main import main
 from .dns import Application as DNSApplication
 from .hello import Application as HelloApplication
-from .klein import Klein, KleinRenderable
 from .math import Application as MathApplication
+from ..ext.klein import Klein, KleinRenderable
 
 
 __all__ = (
