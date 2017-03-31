@@ -2,9 +2,10 @@
 Tests for :mod:`sample_klein_app.application.hello`.
 """
 
-from typing import Any
+from typing import Any, List
 
 from .mock_render import assertResponse
+from .. import hello
 from ..hello import Application
 from ...ext.trial import TestCase
 
@@ -14,10 +15,32 @@ __all__ = (
 )
 
 
+List  # pyflakes
+
+
 class HelloApplicationTests(TestCase):
     """
     Tests for :mod:`sample_klein_app.application.hello`.
     """
+
+    def test_main(self) -> None:
+        """
+        :meth:`Application.main` wraps :func:`.._main.main`.
+        """
+        argsSeen = []  # type: List[Any]
+
+        def main(*args: Any) -> None:
+            assert len(argsSeen) == 0
+            argsSeen.extend(args)
+
+        self.patch(hello, "main", main)
+
+        argv = []  # type: List[Any]
+        Application.main(argv)
+
+        self.assertEqual(len(argsSeen), 2)
+        self.assertIdentical(argsSeen[0], Application)
+        self.assertIdentical(argsSeen[1], argv)
 
     def assertResponse(self, *args: Any, **kwargs: Any) -> None:
         """

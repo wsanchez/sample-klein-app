@@ -3,7 +3,7 @@ Tests for :mod:`sample_klein_app.application.math`.
 """
 
 from math import isnan
-from typing import Any
+from typing import Any, List
 
 from hypothesis import assume, given
 from hypothesis.strategies import floats, integers
@@ -11,6 +11,7 @@ from hypothesis.strategies import floats, integers
 from twisted.web import http
 
 from .mock_render import assertResponse
+from .. import math
 from ..math import Application
 from ...ext.trial import TestCase
 
@@ -20,10 +21,32 @@ __all__ = (
 )
 
 
+List  # pyflakes
+
+
 class MathApplicationTests(TestCase):
     """
     Tests for :mod:`sample_klein_app.application.math`.
     """
+
+    def test_main(self) -> None:
+        """
+        :meth:`Application.main` wraps :func:`.._main.main`.
+        """
+        argsSeen = []  # type: List[Any]
+
+        def main(*args: Any) -> None:
+            assert len(argsSeen) == 0
+            argsSeen.extend(args)
+
+        self.patch(math, "main", main)
+
+        argv = []  # type: List[Any]
+        Application.main(argv)
+
+        self.assertEqual(len(argsSeen), 2)
+        self.assertIdentical(argsSeen[0], Application)
+        self.assertIdentical(argsSeen[1], argv)
 
     def assertResponse(self, *args: Any, **kwargs: Any) -> None:
         """
