@@ -2,10 +2,10 @@
 Shared main function.
 """
 
-from typing import Sequence
+from typing import Optional, Sequence
 
 
-def main(applicationClass, argv: Sequence[str] = None) -> None:
+def main(applicationClass: type, argv: Optional[Sequence[str]] = None) -> None:
     """
     Executable entry point
 
