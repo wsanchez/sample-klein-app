@@ -1,5 +1,6 @@
 -e .  # Get self and dependencies from setup.py
 
+    arrow
     attrs
 
     Twisted==17.1.0
