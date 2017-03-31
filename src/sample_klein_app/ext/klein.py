@@ -32,12 +32,11 @@ KleinRouteMethod = Callable[
 ]
 
 
-#
 # Subclass Klein so that we can override its documentation to work with Sphinx;
 # Klein uses epydoc syntax, which is not compatible, and because the router
 # is an attribute of each application, its doc string shows up in our
 # documentation.
-#
+
 class Klein(SuperKlein):
     """
     Request router.
@@ -51,28 +50,28 @@ class Method(Enum):
     """
 
     # HTTP 1.0
-    GET  = "GET"
+    GET = "GET"
     POST = "POST"
     HEAD = "HEAD"
 
     # HTTP 1.1
     OPTIONS = "OPTIONS"
-    PUT     = "PUT"
-    DELETE  = "DELETE"
-    TRACE   = "TRACE"
+    PUT = "PUT"
+    DELETE = "DELETE"
+    TRACE = "TRACE"
     CONNECT = "CONNECT"
 
     # RFC 5789
     PATCH = "PATCH"
 
     # WebDAV
-    COPY      = "COPY"
-    LOCK      = "LOCK"
-    MKCOL     = "MKCOL"
-    MOVE      = "MOVE"
-    PROPFIND  = "PROPFIND"
+    COPY = "COPY"
+    LOCK = "LOCK"
+    MKCOL = "MKCOL"
+    MOVE = "MOVE"
+    PROPFIND = "PROPFIND"
     PROPPATCH = "PROPPATCH"
-    UNLOCK    = "UNLOCK"
+    UNLOCK = "UNLOCK"
 
 
 
@@ -81,14 +80,14 @@ class ContentType(Enum):
     MIME content types.
     """
 
-    css         = "text/css"
+    css = "text/css"
     eventStream = "text/event-stream"
-    html        = "text/html"
-    javascript  = "application/javascript"
-    json        = "application/json"
-    png         = "image/png"
-    text        = "text/plain"
-    xhtml       = "application/xhtml+xml"
+    html = "text/html"
+    javascript = "application/javascript"
+    json = "application/json"
+    png = "image/png"
+    text = "text/plain"
+    xhtml = "application/xhtml+xml"
 
 
 
@@ -97,11 +96,11 @@ class HeaderName(Enum):
     HTTP header names.
     """
 
-    server       = "Server"
+    server = "Server"
     cacheControl = "Cache-Control"
-    contentType  = "Content-Type"
-    etag         = "ETag"
-    location     = "Location"
+    contentType = "Content-Type"
+    etag = "ETag"
+    location = "Location"
 
 
 
