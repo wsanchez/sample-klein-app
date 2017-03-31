@@ -11,6 +11,7 @@ from twisted.web.iweb import IRenderable, IRequest
 from twisted.web.resource import IResource
 
 from klein import Klein as SuperKlein
+from klein.test.test_resource import _render as renderRequest, requestMock
 
 from .. import __version__ as version
 
@@ -21,6 +22,9 @@ __all__ = (
     "Klein",
     "KleinRenderable",
     "KleinRouteMethod",
+    "Method",
+    "renderRequest",
+    "requestMock",
     "static",
 )
 
