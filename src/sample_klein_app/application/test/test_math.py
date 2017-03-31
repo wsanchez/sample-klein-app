@@ -68,39 +68,39 @@ class MathApplicationTests(TestCase):
 
 
     @given(integers())
-    def test_numberify_integer(self, integer_value: int) -> None:
+    def test_numberify_integer(self, integerValue: int) -> None:
         """
         :meth:`.math.Application.numberify` converts a string integer into an
         :class:`int`.
         """
-        string_value = "{}".format(integer_value)
-        result_value = Application.numberify(string_value)
+        stringValue = "{}".format(integerValue)
+        resultValue = Application.numberify(stringValue)
 
-        self.assertEqual(result_value, integer_value)
-        self.assertEqual(type(result_value), int)
+        self.assertEqual(resultValue, integerValue)
+        self.assertEqual(type(resultValue), int)
 
 
     @given(floats(allow_nan=True, allow_infinity=True))
-    def test_numberify_float(self, float_value: float) -> None:
+    def test_numberify_float(self, floatValue: float) -> None:
         """
         :meth:`.math.Application.numberify` converts a string floating-point
         number into a :class:`float`.
         """
-        string_value = "{}".format(float_value)
-        result_value = Application.numberify(string_value)
+        stringValue = "{}".format(floatValue)
+        resultValue = Application.numberify(stringValue)
 
-        if isnan(float_value):
-            self.assertTrue(isnan(result_value))
+        if isnan(floatValue):
+            self.assertTrue(isnan(resultValue))
         else:
-            self.assertEqual(result_value, float_value)
-        self.assertEqual(type(result_value), float)
+            self.assertEqual(resultValue, floatValue)
+        self.assertEqual(type(resultValue), float)
 
 
     def test_root(self) -> None:
         """
         :meth:`.math.Application.root` returns a canned string.
         """
-        self.assertResponse(b"/", response_data=b"Math happens here.")
+        self.assertResponse(b"/", responseData=b"Math happens here.")
 
 
     @given(integers(), integers())
@@ -110,7 +110,7 @@ class MathApplicationTests(TestCase):
         """
         self.assertResponse(
             "/add/{}/{}".format(x, y).encode("ascii"),
-            response_data=str(x + y).encode("ascii"),
+            responseData=str(x + y).encode("ascii"),
         )
 
 
@@ -121,7 +121,7 @@ class MathApplicationTests(TestCase):
         """
         self.assertResponse(
             "/subtract/{}/{}".format(x, y).encode("ascii"),
-            response_data=str(x - y).encode("ascii")
+            responseData=str(x - y).encode("ascii")
         )
 
 
@@ -132,7 +132,7 @@ class MathApplicationTests(TestCase):
         """
         self.assertResponse(
             "/multiply/{}/{}".format(x, y).encode("ascii"),
-            response_data=str(x * y).encode("ascii")
+            responseData=str(x * y).encode("ascii")
         )
 
 
@@ -144,7 +144,7 @@ class MathApplicationTests(TestCase):
         assume(y != 0)  # Avoid division by zero
         self.assertResponse(
             "/divide/{}/{}".format(x, y).encode("ascii"),
-            response_data=str(x / y).encode("ascii")
+            responseData=str(x / y).encode("ascii")
         )
 
 
@@ -154,6 +154,6 @@ class MathApplicationTests(TestCase):
         """
         self.assertResponse(
             b"/divide/fish/carrots",
-            response_data=b"Invalid inputs provided.",
-            response_code=http.BAD_REQUEST,
+            responseData=b"Invalid inputs provided.",
+            responseCode=http.BAD_REQUEST,
         )

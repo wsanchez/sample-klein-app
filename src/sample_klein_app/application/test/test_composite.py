@@ -77,23 +77,23 @@ class CompositeApplicationTests(TestCase):
             is expected to be bound to.
 
         :param args: Positional arguments to pass to :meth:`assertResponse`.
-            The ``application`` and ``request_path`` arguments are added as the
+            The ``application`` and ``requestPath`` arguments are added as the
             first argument.
 
         :param args: Keyword arguments to pass to :meth:`assertResponse`.
         """
-        path_short = b"/" + childName
-        path_full = path_short + b"/"
+        shortPath = b"/" + childName
+        fullPath = shortPath + b"/"
 
         # Without the trailing "/", we expect a redirect
         self.assertResponse(
-            path_short,
-            response_code=http.MOVED_PERMANENTLY,
-            response_location_path=path_full,
+            shortPath,
+            responseCode=http.MOVED_PERMANENTLY,
+            responseLocationPath=fullPath,
         )
 
         # With the trailing "/", we expect a regular response
-        self.assertResponse(path_full, *args, **kwargs)
+        self.assertResponse(fullPath, *args, **kwargs)
 
 
     def test_root(self) -> None:
@@ -102,7 +102,7 @@ class CompositeApplicationTests(TestCase):
         """
         self.assertResponse(
             b"/",
-            response_data=(
+            responseData=(
                 b"This is a web application composed from multiple "
                 b"applications."
             )
@@ -114,7 +114,7 @@ class CompositeApplicationTests(TestCase):
         :class:`.composite.Application` responds with the DNS application at
         ``/dns``.
         """
-        self.assertChildApplication(b"dns", response_data=b"DNS API.")
+        self.assertChildApplication(b"dns", responseData=b"DNS API.")
 
 
     def test_hello(self) -> None:
@@ -122,7 +122,7 @@ class CompositeApplicationTests(TestCase):
         :class:`.composite.Application` responds with the Hello application at
         ``/hello``.
         """
-        self.assertChildApplication(b"hello", response_data=b"Hello!")
+        self.assertChildApplication(b"hello", responseData=b"Hello!")
 
 
     def test_math(self) -> None:
@@ -131,5 +131,5 @@ class CompositeApplicationTests(TestCase):
         ``/math``.
         """
         self.assertChildApplication(
-            b"math", response_data=b"Math happens here."
+            b"math", responseData=b"Math happens here."
         )

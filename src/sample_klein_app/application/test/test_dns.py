@@ -70,7 +70,7 @@ class DNSApplicationTests(TestCase):
         """
         :meth:`.dns.Application.root` returns a canned string.
         """
-        self.assertResponse(b"/", response_data=b"DNS API.")
+        self.assertResponse(b"/", responseData=b"DNS API.")
 
 
     def test_hostname_found(self) -> None:
@@ -84,7 +84,7 @@ class DNSApplicationTests(TestCase):
         self.patch(dns, "getHostByName", getHostByName)
 
         self.assertResponse(
-            b"/gethostbyname/foo.example.com", response_data=b"10.10.30.40",
+            b"/gethostbyname/foo.example.com", responseData=b"10.10.30.40",
         )
 
 
@@ -101,8 +101,8 @@ class DNSApplicationTests(TestCase):
 
         self.assertResponse(
             b"/gethostbyname/foo.example.com",
-            response_data=b"no such host",
-            response_code=http.NOT_FOUND,
+            responseData=b"no such host",
+            responseCode=http.NOT_FOUND,
         )
 
 
@@ -119,6 +119,6 @@ class DNSApplicationTests(TestCase):
 
         self.assertResponse(
             b"/gethostbyname/foo.example.com",
-            response_data=b"lookup error",
-            response_code=http.NOT_FOUND,
+            responseData=b"lookup error",
+            responseCode=http.NOT_FOUND,
         )

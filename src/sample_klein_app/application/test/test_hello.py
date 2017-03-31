@@ -65,4 +65,4 @@ class HelloApplicationTests(TestCase):
         """
         :meth:`.hello.Application.hello` returns a canned string.
         """
-        self.assertResponse(b"/", response_data=b"Hello!")
+        self.assertResponse(b"/", responseData=b"Hello!")
