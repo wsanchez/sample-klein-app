@@ -2,11 +2,15 @@
 Tools for simulating resource rendering.
 """
 
+from typing import Any
+
 from twisted.python.url import URL
 from twisted.web import http
 from twisted.web.iweb import IRequest
 
 from klein.test.test_resource import _render, requestMock as mock_request
+
+from ...ext.trial import TestCase
 
 
 __all__ = (
@@ -16,7 +20,7 @@ __all__ = (
 
 
 async def assertResponse(
-    test, application,
+    test: TestCase, application: Any,
     request_path: str,
     response_code: int = http.OK,
     response_data: bytes = None,
@@ -60,7 +64,7 @@ async def assertResponse(
         test.assertEqual(path, response_location_path)
 
 
-async def render(application, request: IRequest) -> None:
+async def render(application: Any, request: IRequest) -> None:
     """
     Render a response from the given application for the given request.
 

@@ -2,6 +2,8 @@
 DNS application
 """
 
+from typing import Optional, Sequence
+
 from twisted.internet.error import DNSLookupError
 from twisted.names.client import getHostByName
 from twisted.names.error import DNSNameError
@@ -26,7 +28,12 @@ class Application(object):
 
     router = Klein()
 
-    main = classmethod(main)  # type: ignore
+    @classmethod
+    def main(cls, argv: Optional[Sequence[str]] = None) -> None:
+        """
+        Main entry point.
+        """
+        main(cls, argv)
 
     @router.route("/")
     def root(self, request: IRequest) -> KleinRenderable:
@@ -64,4 +71,4 @@ class Application(object):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    Application.main()  # type: ignore
+    Application.main()

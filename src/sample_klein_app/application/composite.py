@@ -2,6 +2,8 @@
 Composite application
 """
 
+from typing import Optional, Sequence
+
 from twisted.web.iweb import IRequest
 
 from ._main import main
@@ -26,7 +28,12 @@ class Application(object):
 
     router = Klein()
 
-    main = classmethod(main)  # type: ignore
+    @classmethod
+    def main(cls, argv: Optional[Sequence[str]] = None) -> None:
+        """
+        Main entry point.
+        """
+        main(cls, argv)
 
     @router.route("/")
     def root(self, request: IRequest) -> KleinRenderable:
@@ -74,4 +81,4 @@ class Application(object):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    Application.main()  # type: ignore
+    Application.main()

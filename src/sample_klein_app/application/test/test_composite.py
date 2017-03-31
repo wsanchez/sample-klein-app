@@ -2,6 +2,8 @@
 Tests for :mod:`sample_klein_app.application.composite`.
 """
 
+from typing import Any
+
 from twisted.web import http
 
 from .mock_render import assertResponse
@@ -19,7 +21,7 @@ class CompositeApplicationTests(TestCase):
     Tests for :mod:`sample_klein_app.application.composite`.
     """
 
-    def assertResponse(self, *args, **kwargs) -> None:
+    def assertResponse(self, *args: Any, **kwargs: Any) -> None:
         """
         Generate and process a request using the an instance of
         :class:`.composite.Application` and assert that the response is as
@@ -36,15 +38,17 @@ class CompositeApplicationTests(TestCase):
             assertResponse(self, Application(), *args, **kwargs)
         )
 
-    def assertChildApplication(self, sub_app, *args, **kwargs) -> None:
+    def assertChildApplication(
+        self, childName: bytes, *args: Any, **kwargs: Any
+    ) -> None:
         """
         Assert that a child application is bound to a given name as a child
         resource of :class:`.composite.Application`.
 
         See :meth:`assertResponse`.
 
-        :param sub_app: The name of the child resource the child application is
-            expected to be bound to.
+        :param childName: The name of the child resource the child application
+            is expected to be bound to.
 
         :param args: Positional arguments to pass to :meth:`assertResponse`.
             The ``application`` and ``request_path`` arguments are added as the
@@ -52,7 +56,7 @@ class CompositeApplicationTests(TestCase):
 
         :param args: Keyword arguments to pass to :meth:`assertResponse`.
         """
-        path_short = b"/" + sub_app
+        path_short = b"/" + childName
         path_full = path_short + b"/"
 
         # Without the trailing "/", we expect a redirect

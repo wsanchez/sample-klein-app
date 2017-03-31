@@ -2,9 +2,13 @@
 Tests for :mod:`config_service.util.json`
 """
 
-from datetime import date as Date, datetime as DateTime
+from datetime import (
+    date as Date, datetime as DateTime,
+    timedelta as TimeDelta, timezone as TimeZone,
+)
 from json import JSONDecodeError
 from textwrap import dedent
+from typing import cast
 
 from hypothesis import given
 from hypothesis.extra.datetime import dates, datetimes
@@ -154,8 +158,13 @@ class DateTimeTests(TestCase):
         :return: An RFC 3339 formatted date-time string corresponding to
             :obj:`datetime`.
         """
-        timeZone = dateTime.tzinfo
-        utcOffset = timeZone.utcoffset(dateTime).total_seconds()
+        timeZone = cast(TimeZone, dateTime.tzinfo)
+        assert timeZone is not None
+
+        offset = cast(TimeDelta, timeZone.utcoffset(dateTime))
+        assert offset is not None
+
+        utcOffset = offset.total_seconds()
 
         if dateTime.microsecond == 0:
             microsecond = ""

@@ -14,11 +14,13 @@ tmp="$(mktemp -t mypy.XXXX)";
 # Bugs filed:
 # Too many arguments for: https://github.com/python/mypy/issues/2088
 # Unexpected keyword argument: https://github.com/python/mypy/issues/2088
+# JSONDecodeError has no attribute: https://github.com/python/mypy/issues/2981
 
-mypy "$@"                                           \
-    | grep -v                                       \
-        -e ': error: Too many arguments for '       \
-        -e ': error: Unexpected keyword argument '  \
+mypy "$@"                                                 \
+    | grep -v                                             \
+        -e ': error: Too many arguments for '             \
+        -e ': error: Unexpected keyword argument '        \
+        -e ': error: "JSONDecodeError" has no attribute'  \
     > "${tmp}" || true;
 
 cat "${tmp}";

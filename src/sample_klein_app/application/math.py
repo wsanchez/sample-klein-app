@@ -2,8 +2,9 @@
 Math application
 """
 
-from typing import Union
+from typing import Optional, Sequence, Union
 
+from twisted.python.failure import Failure
 from twisted.web import http
 from twisted.web.iweb import IRequest
 
@@ -25,7 +26,12 @@ class Application(object):
 
     router = Klein()
 
-    main = classmethod(main)   # type: ignore
+    @classmethod
+    def main(cls, argv: Optional[Sequence[str]] = None) -> None:
+        """
+        Main entry point.
+        """
+        main(cls, argv)
 
     @router.route("/")
     def root(self, request: IRequest) -> KleinRenderable:
@@ -105,7 +111,9 @@ class Application(object):
         return "{}".format(x)
 
     @router.handle_errors(ValueError)
-    def valueError(self, request: IRequest, failure) -> KleinRenderable:
+    def valueError(
+        self, request: IRequest, failure: Failure
+    ) -> KleinRenderable:
         """
         Error handler for :exc:`ValueError`.
 
@@ -130,4 +138,4 @@ class Application(object):
 
 
 if __name__ == "__main__":  # pragma: no cover
-    Application.main()  # type: ignore
+    Application.main()

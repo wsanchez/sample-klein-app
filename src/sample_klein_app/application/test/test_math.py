@@ -3,6 +3,7 @@ Tests for :mod:`sample_klein_app.application.math`.
 """
 
 from math import isnan
+from typing import Any
 
 from hypothesis import assume, given
 from hypothesis.strategies import floats, integers
@@ -24,7 +25,7 @@ class MathApplicationTests(TestCase):
     Tests for :mod:`sample_klein_app.application.math`.
     """
 
-    def assertResponse(self, *args, **kwargs) -> None:
+    def assertResponse(self, *args: Any, **kwargs: Any) -> None:
         """
         Generate and process a request using the an instance of
         :class:`.math.Application` and assert that the response is as expected.

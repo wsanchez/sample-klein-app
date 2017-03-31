@@ -2,6 +2,8 @@
 Tests for :mod:`sample_klein_app.application.hello`.
 """
 
+from typing import Any
+
 from .mock_render import assertResponse
 from ..hello import Application
 from ...ext.trial import TestCase
@@ -17,7 +19,7 @@ class HelloApplicationTests(TestCase):
     Tests for :mod:`sample_klein_app.application.hello`.
     """
 
-    def assertResponse(self, *args, **kwargs) -> None:
+    def assertResponse(self, *args: Any, **kwargs: Any) -> None:
         """
         Generate and process a request using the an instance of
         :class:`.hello.Application` and assert that the response is as

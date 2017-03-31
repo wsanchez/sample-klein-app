@@ -2,6 +2,8 @@
 Tests for :mod:`sample_klein_app.application.dns`.
 """
 
+from typing import Any
+
 from twisted.internet.defer import Deferred, fail, succeed
 from twisted.internet.error import DNSLookupError
 from twisted.names.error import DNSNameError
@@ -23,7 +25,7 @@ class DNSApplicationTests(TestCase):
     Tests for :mod:`sample_klein_app.application.dns`.
     """
 
-    def assertResponse(self, *args, **kwargs) -> None:
+    def assertResponse(self, *args: Any, **kwargs: Any) -> None:
         """
         Generate and process a request using the an instance of
         :class:`.dns.Application` and assert that the response is as expected.
@@ -50,7 +52,7 @@ class DNSApplicationTests(TestCase):
         :meth:`.dns.Application.hostname` looks up the given name and provides
         an IP address.
         """
-        def getHostByName(*args, **kwargs) -> Deferred:
+        def getHostByName(*args: Any, **kwargs: Any) -> Deferred:
             return succeed("10.10.30.40")
 
         self.patch(dns, "getHostByName", getHostByName)
@@ -65,7 +67,7 @@ class DNSApplicationTests(TestCase):
         :const:`twisted.web.http.NOT_FOUND` error if the host is not found in
         DNS.
         """
-        def getHostByName(*args, **kwargs) -> Deferred:
+        def getHostByName(*args: Any, **kwargs: Any) -> Deferred:
             return fail(DNSNameError())
 
         self.patch(dns, "getHostByName", getHostByName)
@@ -82,7 +84,7 @@ class DNSApplicationTests(TestCase):
         :const:`twisted.web.http.NOT_FOUND` error if there is a DNS lookup
         error.
         """
-        def getHostByName(*args, **kwargs) -> Deferred:
+        def getHostByName(*args: Any, **kwargs: Any) -> Deferred:
             return fail(DNSLookupError())
 
         self.patch(dns, "getHostByName", getHostByName)
