@@ -4,9 +4,9 @@ Tests for :mod:`sample_klein_app.application.composite`.
 
 from twisted.web import http
 
-from . import unittest
 from .mock_render import assertResponse
 from ..composite import Application
+from ...ext.trial import TestCase
 
 
 __all__ = (
@@ -14,7 +14,7 @@ __all__ = (
 )
 
 
-class CompositeApplicationTests(unittest.TestCase):
+class CompositeApplicationTests(TestCase):
     """
     Tests for :mod:`sample_klein_app.application.composite`.
     """

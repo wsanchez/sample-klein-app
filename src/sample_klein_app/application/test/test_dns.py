@@ -7,10 +7,10 @@ from twisted.internet.error import DNSLookupError
 from twisted.names.error import DNSNameError
 from twisted.web import http
 
-from . import unittest
 from .mock_render import assertResponse
 from .. import dns
 from ..dns import Application
+from ...ext.trial import TestCase
 
 
 __all__ = (
@@ -18,7 +18,7 @@ __all__ = (
 )
 
 
-class DNSApplicationTests(unittest.TestCase):
+class DNSApplicationTests(TestCase):
     """
     Tests for :mod:`sample_klein_app.application.dns`.
     """

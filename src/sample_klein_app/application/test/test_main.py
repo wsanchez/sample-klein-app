@@ -4,8 +4,8 @@ Tests for L{rms.application._main}.
 
 from attr import Factory, attrib, attrs
 
-from . import unittest
 from .._main import main
+from ...ext.trial import TestCase
 
 
 __all__ = (
@@ -13,7 +13,7 @@ __all__ = (
 )
 
 
-class ApplicationMainTests(unittest.TestCase):
+class ApplicationMainTests(TestCase):
     """
     Tests for L{rms.application._main}.
     """

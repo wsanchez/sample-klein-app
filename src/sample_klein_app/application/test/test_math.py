@@ -9,9 +9,9 @@ from hypothesis.strategies import floats, integers
 
 from twisted.web import http
 
-from . import unittest
 from .mock_render import assertResponse
 from ..math import Application
+from ...ext.trial import TestCase
 
 
 __all__ = (
@@ -19,7 +19,7 @@ __all__ = (
 )
 
 
-class MathApplicationTests(unittest.TestCase):
+class MathApplicationTests(TestCase):
     """
     Tests for :mod:`sample_klein_app.application.math`.
     """

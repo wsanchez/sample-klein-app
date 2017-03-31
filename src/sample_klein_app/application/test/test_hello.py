@@ -2,9 +2,9 @@
 Tests for :mod:`sample_klein_app.application.hello`.
 """
 
-from . import unittest
 from .mock_render import assertResponse
 from ..hello import Application
+from ...ext.trial import TestCase
 
 
 __all__ = (
@@ -12,7 +12,7 @@ __all__ = (
 )
 
 
-class HelloApplicationTests(unittest.TestCase):
+class HelloApplicationTests(TestCase):
     """
     Tests for :mod:`sample_klein_app.application.hello`.
     """
