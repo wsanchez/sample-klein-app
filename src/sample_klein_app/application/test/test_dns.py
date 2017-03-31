@@ -23,6 +23,7 @@ __all__ = (
 List  # pyflakes
 
 
+
 class DNSApplicationTests(TestCase):
     """
     Tests for :mod:`sample_klein_app.application.dns`.
@@ -47,6 +48,7 @@ class DNSApplicationTests(TestCase):
         self.assertIdentical(argsSeen[0], Application)
         self.assertIdentical(argsSeen[1], argv)
 
+
     def assertResponse(self, *args: Any, **kwargs: Any) -> None:
         """
         Generate and process a request using the an instance of
@@ -63,11 +65,13 @@ class DNSApplicationTests(TestCase):
             assertResponse(self, Application(), *args, **kwargs)
         )
 
+
     def test_root(self) -> None:
         """
         :meth:`.dns.Application.root` returns a canned string.
         """
         self.assertResponse(b"/", response_data=b"DNS API.")
+
 
     def test_hostname_found(self) -> None:
         """
@@ -82,6 +86,7 @@ class DNSApplicationTests(TestCase):
         self.assertResponse(
             b"/gethostbyname/foo.example.com", response_data=b"10.10.30.40",
         )
+
 
     def test_hostname_not_found(self) -> None:
         """
@@ -99,6 +104,7 @@ class DNSApplicationTests(TestCase):
             response_data=b"no such host",
             response_code=http.NOT_FOUND,
         )
+
 
     def test_hostname_lookup_error(self) -> None:
         """

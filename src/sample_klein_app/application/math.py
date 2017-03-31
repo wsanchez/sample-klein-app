@@ -18,6 +18,7 @@ __all__ = (
 )
 
 
+
 class Application(object):
     """
     Math application.
@@ -27,12 +28,14 @@ class Application(object):
 
     router = Klein()
 
+
     @classmethod
     def main(cls, argv: Optional[Sequence[str]] = None) -> None:
         """
         Main entry point.
         """
         main(cls, argv)
+
 
     @router.route("/")
     def root(self, request: IRequest) -> KleinRenderable:
@@ -44,6 +47,7 @@ class Application(object):
         :param request: The request to respond to.
         """
         return "Math happens here."
+
 
     @router.route("/add/<a>/<b>")
     def add(self, request: IRequest, a: str, b: str) -> KleinRenderable:
@@ -60,6 +64,7 @@ class Application(object):
         """
         x = self.numberify(a) + self.numberify(b)  # type: ignore #see #21
         return "{}".format(x)
+
 
     @router.route("/subtract/<a>/<b>")
     def subtract(self, request: IRequest, a: str, b: str) -> KleinRenderable:
@@ -78,6 +83,7 @@ class Application(object):
         x = self.numberify(a) - self.numberify(b)  # type: ignore #see #21
         return "{}".format(x)
 
+
     @router.route("/multiply/<a>/<b>")
     def multiply(self, request: IRequest, a: str, b: str) -> KleinRenderable:
         """
@@ -93,6 +99,7 @@ class Application(object):
         """
         x = self.numberify(a) * self.numberify(b)  # type: ignore #see #21
         return "{}".format(x)
+
 
     @router.route("/divide/<a>/<b>")
     def divide(self, request: IRequest, a: str, b: str) -> KleinRenderable:
@@ -111,6 +118,7 @@ class Application(object):
         x = self.numberify(a) / self.numberify(b)  # type: ignore #see #21
         return "{}".format(x)
 
+
     @router.handle_errors(ValueError)
     def valueError(
         self, request: IRequest, failure: Failure
@@ -125,6 +133,7 @@ class Application(object):
         request.setResponseCode(http.BAD_REQUEST)
         return "Invalid inputs provided."
 
+
     @staticmethod
     def numberify(string: str) -> Union[int, float]:
         """
@@ -136,6 +145,7 @@ class Application(object):
             return int(string)
         except ValueError:
             return float(string)
+
 
 
 if __name__ == "__main__":  # pragma: no cover

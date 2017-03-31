@@ -32,6 +32,7 @@ KleinRouteMethod = Callable[
 ]
 
 
+
 #
 # Subclass Klein so that we can override its documentation to work with Sphinx;
 # Klein uses epydoc syntax, which is not compatible, and because the router

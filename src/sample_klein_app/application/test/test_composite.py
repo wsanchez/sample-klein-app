@@ -20,6 +20,7 @@ __all__ = (
 List  # pyflakes
 
 
+
 class CompositeApplicationTests(TestCase):
     """
     Tests for :mod:`sample_klein_app.application.composite`.
@@ -44,6 +45,7 @@ class CompositeApplicationTests(TestCase):
         self.assertIdentical(argsSeen[0], Application)
         self.assertIdentical(argsSeen[1], argv)
 
+
     def assertResponse(self, *args: Any, **kwargs: Any) -> None:
         """
         Generate and process a request using the an instance of
@@ -60,6 +62,7 @@ class CompositeApplicationTests(TestCase):
         self.successResultOf(
             assertResponse(self, Application(), *args, **kwargs)
         )
+
 
     def assertChildApplication(
         self, childName: bytes, *args: Any, **kwargs: Any
@@ -92,6 +95,7 @@ class CompositeApplicationTests(TestCase):
         # With the trailing "/", we expect a regular response
         self.assertResponse(path_full, *args, **kwargs)
 
+
     def test_root(self) -> None:
         """
         :meth:`.composite.Application.root` responds with a canned string.
@@ -104,6 +108,7 @@ class CompositeApplicationTests(TestCase):
             )
         )
 
+
     def test_dns(self) -> None:
         """
         :class:`.composite.Application` responds with the DNS application at
@@ -111,12 +116,14 @@ class CompositeApplicationTests(TestCase):
         """
         self.assertChildApplication(b"dns", response_data=b"DNS API.")
 
+
     def test_hello(self) -> None:
         """
         :class:`.composite.Application` responds with the Hello application at
         ``/hello``.
         """
         self.assertChildApplication(b"hello", response_data=b"Hello!")
+
 
     def test_math(self) -> None:
         """

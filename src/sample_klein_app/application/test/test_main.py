@@ -15,6 +15,7 @@ __all__ = (
 )
 
 
+
 class ApplicationMainTests(TestCase):
     """
     Tests for L{rms.application._main}.
@@ -30,6 +31,7 @@ class ApplicationMainTests(TestCase):
 
         self.assertEqual(len(runsSeen), 1)
         self.assertEqual(runsSeen[0], dict(host="localhost", port=8080))
+
 
 
 class MockApplication(object):
@@ -49,6 +51,7 @@ class MockApplication(object):
             self.runsSeen.append(kwargs)
 
     router = MockRouter()
+
 
     @classmethod
     def main(cls, argv: Optional[Sequence[str]] = None) -> None:

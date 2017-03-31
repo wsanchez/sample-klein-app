@@ -20,6 +20,7 @@ __all__ = (
 )
 
 
+
 class Application(object):
     """
     DNS application.
@@ -29,12 +30,14 @@ class Application(object):
 
     router = Klein()
 
+
     @classmethod
     def main(cls, argv: Optional[Sequence[str]] = None) -> None:
         """
         Main entry point.
         """
         main(cls, argv)
+
 
     @router.route("/")
     def root(self, request: IRequest) -> KleinRenderable:
@@ -46,6 +49,7 @@ class Application(object):
         :param request: The request to respond to.
         """
         return "DNS API."
+
 
     @router.route("/gethostbyname/<name>")
     async def hostname(self, request: IRequest, name: str) -> KleinRenderable:
@@ -69,6 +73,7 @@ class Application(object):
             return "lookup error"
 
         return address
+
 
 
 if __name__ == "__main__":  # pragma: no cover

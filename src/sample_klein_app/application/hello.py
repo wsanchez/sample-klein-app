@@ -16,6 +16,7 @@ __all__ = (
 )
 
 
+
 class Application(object):
     """
     Hello application.
@@ -25,12 +26,14 @@ class Application(object):
 
     router = Klein()
 
+
     @classmethod
     def main(cls, argv: Optional[Sequence[str]] = None) -> None:
         """
         Main entry point.
         """
         main(cls, argv)
+
 
     @router.route("/")
     def hello(self, request: IRequest) -> KleinRenderable:
@@ -42,6 +45,7 @@ class Application(object):
         :param request: The request to respond to.
         """
         return "Hello!"
+
 
 
 if __name__ == "__main__":  # pragma: no cover

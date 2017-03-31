@@ -24,6 +24,7 @@ __all__ = (
 List  # pyflakes
 
 
+
 class MathApplicationTests(TestCase):
     """
     Tests for :mod:`sample_klein_app.application.math`.
@@ -48,6 +49,7 @@ class MathApplicationTests(TestCase):
         self.assertIdentical(argsSeen[0], Application)
         self.assertIdentical(argsSeen[1], argv)
 
+
     def assertResponse(self, *args: Any, **kwargs: Any) -> None:
         """
         Generate and process a request using the an instance of
@@ -64,6 +66,7 @@ class MathApplicationTests(TestCase):
             assertResponse(self, Application(), *args, **kwargs)
         )
 
+
     @given(integers())
     def test_numberify_integer(self, integer_value: int) -> None:
         """
@@ -75,6 +78,7 @@ class MathApplicationTests(TestCase):
 
         self.assertEqual(result_value, integer_value)
         self.assertEqual(type(result_value), int)
+
 
     @given(floats(allow_nan=True, allow_infinity=True))
     def test_numberify_float(self, float_value: float) -> None:
@@ -91,11 +95,13 @@ class MathApplicationTests(TestCase):
             self.assertEqual(result_value, float_value)
         self.assertEqual(type(result_value), float)
 
+
     def test_root(self) -> None:
         """
         :meth:`.math.Application.root` returns a canned string.
         """
         self.assertResponse(b"/", response_data=b"Math happens here.")
+
 
     @given(integers(), integers())
     def test_add(self, x: int, y: int) -> None:
@@ -107,6 +113,7 @@ class MathApplicationTests(TestCase):
             response_data=str(x + y).encode("ascii"),
         )
 
+
     @given(integers(), integers())
     def test_subtract(self, x: int, y: int) -> None:
         """
@@ -116,6 +123,7 @@ class MathApplicationTests(TestCase):
             "/subtract/{}/{}".format(x, y).encode("ascii"),
             response_data=str(x - y).encode("ascii")
         )
+
 
     @given(integers(), integers())
     def test_multiply(self, x: int, y: int) -> None:
@@ -127,6 +135,7 @@ class MathApplicationTests(TestCase):
             response_data=str(x * y).encode("ascii")
         )
 
+
     @given(integers(), integers())
     def test_divide(self, x: int, y: int) -> None:
         """
@@ -137,6 +146,7 @@ class MathApplicationTests(TestCase):
             "/divide/{}/{}".format(x, y).encode("ascii"),
             response_data=str(x / y).encode("ascii")
         )
+
 
     def test_invalid_input(self) -> None:
         """

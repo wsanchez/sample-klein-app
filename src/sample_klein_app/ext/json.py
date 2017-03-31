@@ -66,6 +66,7 @@ def jsonTextFromObject(obj: Any, pretty: bool = False) -> str:
     )
 
 
+
 def objectFromJSONText(text: str) -> Any:
     """
     Convert JSON text into an object.
@@ -80,6 +81,7 @@ def objectFromJSONText(text: str) -> Any:
         )
 
 
+
 def dateAsRFC3339Text(date: Date) -> str:
     """
     Convert a :class:`Date` into an RFC 3339 formatted date string.
@@ -89,6 +91,7 @@ def dateAsRFC3339Text(date: Date) -> str:
     :return: An RFC 3339 formatted date string corresponding to :obj:`date`.
     """
     return date.isoformat()
+
 
 
 def rfc3339TextAsDate(rfc3339: str) -> Date:
@@ -102,6 +105,7 @@ def rfc3339TextAsDate(rfc3339: str) -> Date:
     return DateTimeParser().parse_iso(rfc3339).date()
 
 
+
 def dateTimeAsRFC3339Text(dateTime: DateTime) -> str:
     """
     Convert a :class:`DateTime` into an RFC 3339 formatted date-time string.
@@ -112,6 +116,7 @@ def dateTimeAsRFC3339Text(dateTime: DateTime) -> str:
         :obj:`dateTime`.
     """
     return dateTime.isoformat()
+
 
 
 def rfc3339TextAsDateTime(rfc3339: str) -> DateTime:

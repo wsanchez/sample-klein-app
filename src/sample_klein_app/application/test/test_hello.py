@@ -42,6 +42,7 @@ class HelloApplicationTests(TestCase):
         self.assertIdentical(argsSeen[0], Application)
         self.assertIdentical(argsSeen[1], argv)
 
+
     def assertResponse(self, *args: Any, **kwargs: Any) -> None:
         """
         Generate and process a request using the an instance of
@@ -58,6 +59,7 @@ class HelloApplicationTests(TestCase):
         self.successResultOf(
             assertResponse(self, Application(), *args, **kwargs)
         )
+
 
     def test_hello(self) -> None:
         """

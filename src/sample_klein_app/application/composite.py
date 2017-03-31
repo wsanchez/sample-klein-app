@@ -19,6 +19,7 @@ __all__ = (
 )
 
 
+
 class Application(object):
     """
     Composite application.
@@ -29,12 +30,14 @@ class Application(object):
 
     router = Klein()
 
+
     @classmethod
     def main(cls, argv: Optional[Sequence[str]] = None) -> None:
         """
         Main entry point.
         """
         main(cls, argv)
+
 
     @router.route("/")
     def root(self, request: IRequest) -> KleinRenderable:
@@ -47,6 +50,7 @@ class Application(object):
         """
         return "This is a web application composed from multiple applications."
 
+
     @router.route("/dns/", branch=True)
     def dns(self, request: IRequest) -> KleinRenderable:
         """
@@ -57,6 +61,7 @@ class Application(object):
         :param request: The request to respond to.
         """
         return DNSApplication().router.resource()
+
 
     @router.route("/hello/", branch=True)
     def hello(self, request: IRequest) -> KleinRenderable:
@@ -69,6 +74,7 @@ class Application(object):
         """
         return HelloApplication().router.resource()
 
+
     @router.route("/math/", branch=True)
     def math(self, request: IRequest) -> KleinRenderable:
         """
@@ -79,6 +85,7 @@ class Application(object):
         :param request: The request to respond to.
         """
         return MathApplication().router.resource()
+
 
 
 if __name__ == "__main__":  # pragma: no cover
