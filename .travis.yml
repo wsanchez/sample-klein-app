@@ -22,6 +22,9 @@ matrix:
       env: TOXENV=mypy
 
     - python: 3.5
+      env: TOXENV=twistedchecker
+
+    - python: 3.5
       env: TOXENV=docs
 
     - python: 3.5
