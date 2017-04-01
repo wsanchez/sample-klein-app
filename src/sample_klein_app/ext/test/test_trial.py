@@ -15,7 +15,7 @@ class ResultOfTests(TestCase):
     Tests for ``*ResultOf`` methods of :class:`TestCase`.
     """
 
-    def test_successResultOf(self):
+    def test_successResultOf(self) -> None:
         """
         :meth:`TestCase.successResultOf` works with coroutines.
         """
@@ -24,7 +24,7 @@ class ResultOfTests(TestCase):
     test_successResultOf.todo = "unimplemented"
 
 
-    def test_failureResultOf(self):
+    def test_failureResultOf(self) -> None:
         """
         :meth:`TestCase.failureResultOf` works with coroutines.
         """
@@ -39,7 +39,7 @@ class AssertionTests(TestCase):
     Tests for ``assert*`` methods of :class:`TestCase`.
     """
 
-    def test_assertResponseCode_match(self):
+    def test_assertResponseCode_match(self) -> None:
         """
         :meth:`TestCase.assertResponseCode` does not raise when given a request
         with the expected response code.
@@ -50,7 +50,7 @@ class AssertionTests(TestCase):
         self.assertResponseCode(request, 201)
 
 
-    def test_assertResponseCode_mismatch(self):
+    def test_assertResponseCode_mismatch(self) -> None:
         """
         :meth:`TestCase.assertResponseCode` raises :obj:`self.failureException`
         when given a request without the expected response code.
@@ -63,7 +63,7 @@ class AssertionTests(TestCase):
         )
 
 
-    def test_assertResponseContentType_match(self):
+    def test_assertResponseContentType_match(self) -> None:
         """
         :meth:`TestCase.assertResponseContentType` does not raise when given a
         request with the expected response ``Content-Type`` header.
@@ -74,7 +74,7 @@ class AssertionTests(TestCase):
         self.assertResponseContentType(request, "text/l33t")
 
 
-    def test_assertResponseContentType_mismatch(self):
+    def test_assertResponseContentType_mismatch(self) -> None:
         """
         :meth:`TestCase.assertResponseContentType` raises
         :obj:`self.failureException` when given a request without the expected
