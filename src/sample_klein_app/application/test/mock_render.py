@@ -2,11 +2,15 @@
 Tools for simulating resource rendering.
 """
 
+from typing import Any
+
 from twisted.python.url import URL
 from twisted.web import http
 from twisted.web.iweb import IRequest
 
 from klein.test.test_resource import _render, requestMock as mock_request
+
+from ...ext.trial import TestCase
 
 
 __all__ = (
@@ -16,11 +20,11 @@ __all__ = (
 
 
 async def assertResponse(
-    test, application,
-    request_path: str,
-    response_code: int = http.OK,
-    response_data: bytes = None,
-    response_location_path: str = None,
+    test: TestCase, application: Any,
+    requestPath: str,
+    responseCode: int = http.OK,
+    responseData: bytes = None,
+    responseLocationPath: str = None,
 ) -> None:
     """
     Generate and process a request using the given application and assert
@@ -28,26 +32,26 @@ async def assertResponse(
 
     :param application: The application to route the request to.
 
-    :param request_path: The path portion of the request URI.
+    :param requestPath: The path portion of the request URI.
 
-    :param response_code: The expected HTTP status code for the response.
+    :param responseCode: The expected HTTP status code for the response.
 
-    :param response_data: The expected HTTP entity body data for the response.
+    :param responseData: The expected HTTP entity body data for the response.
 
-    :param response_location_path: The expected ``Location`` HTTP header value
+    :param responseLocationPath: The expected ``Location`` HTTP header value
         for the response.
     """
-    request = mock_request(request_path)
+    request = mock_request(requestPath)
 
     await render(application, request)
 
-    test.assertEqual(request.code, response_code)
+    test.assertEqual(request.code, responseCode)
 
-    if response_data is not None:
+    if responseData is not None:
         data = request.getWrittenData()
-        test.assertEqual(data, response_data)
+        test.assertEqual(data, responseData)
 
-    if response_location_path is not None:
+    if responseLocationPath is not None:
         values = request.responseHeaders.getRawHeaders("location")
         test.assertTrue(
             len(values) > 0, "No location header in response."
@@ -57,10 +61,10 @@ async def assertResponse(
         )
         url = URL.fromText(values[0])
         path = ("/" + "/".join(url.path)).encode("utf-8")
-        test.assertEqual(path, response_location_path)
+        test.assertEqual(path, responseLocationPath)
 
 
-async def render(application, request: IRequest) -> None:
+async def render(application: Any, request: IRequest) -> None:
     """
     Render a response from the given application for the given request.
 

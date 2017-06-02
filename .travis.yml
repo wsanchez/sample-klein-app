@@ -22,6 +22,9 @@ matrix:
       env: TOXENV=mypy
 
     - python: 3.5
+      env: TOXENV=twistedchecker
+
+    - python: 3.5
       env: TOXENV=docs
 
     - python: 3.5
@@ -34,11 +37,12 @@ matrix:
       env: TOXENV=py37-coverage,codecov
 
   allow_failures:
-    # Broke, not sure what's up here
-    - env: TOXENV=mypy
+    # Needs work
+    - env: TOXENV=docs
 
     # This is a development version of Python
     - env: TOXENV=py37-coverage,codecov
+
 
 script:
   - tox

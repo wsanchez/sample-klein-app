@@ -2,10 +2,12 @@
 Tests for L{rms.application._main}.
 """
 
+from typing import Any, Optional, Sequence
+
 from attr import Factory, attrib, attrs
 
-from . import unittest
 from .._main import main
+from ...ext.trial import TestCase
 
 
 __all__ = (
@@ -13,7 +15,8 @@ __all__ = (
 )
 
 
-class ApplicationMainTests(unittest.TestCase):
+
+class ApplicationMainTests(TestCase):
     """
     Tests for L{rms.application._main}.
     """
@@ -30,12 +33,13 @@ class ApplicationMainTests(unittest.TestCase):
         self.assertEqual(runsSeen[0], dict(host="localhost", port=8080))
 
 
+
 class MockApplication(object):
     """
     Mock application.
     """
 
-    @attrs
+    @attrs(frozen=True)
     class MockRouter(object):
         """
         Mock router.
@@ -43,9 +47,12 @@ class MockApplication(object):
 
         runsSeen = attrib(default=Factory(list))
 
-        def run(self, **kwargs):
+        def run(self, **kwargs: Any) -> None:
             self.runsSeen.append(kwargs)
 
     router = MockRouter()
 
-    main = classmethod(main)  # type: ignore
+
+    @classmethod
+    def main(cls, argv: Optional[Sequence[str]] = None) -> None:
+        main(cls, argv)

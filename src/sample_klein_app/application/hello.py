@@ -1,16 +1,20 @@
+# -*- test-case-name: sample_klein_app.application.test.test_hello -*-
 """
 Hello application
 """
 
+from typing import Optional, Sequence
+
 from twisted.web.iweb import IRequest
 
 from ._main import main
-from .klein import Klein, KleinRenderable
+from ..ext.klein import Klein, KleinRenderable
 
 
 __all__ = (
     "Application",
 )
+
 
 
 class Application(object):
@@ -22,7 +26,14 @@ class Application(object):
 
     router = Klein()
 
-    main = classmethod(main)  # type: ignore
+
+    @classmethod
+    def main(cls, argv: Optional[Sequence[str]] = None) -> None:
+        """
+        Main entry point.
+        """
+        main(cls, argv)
+
 
     @router.route("/")
     def hello(self, request: IRequest) -> KleinRenderable:
@@ -36,5 +47,6 @@ class Application(object):
         return "Hello!"
 
 
+
 if __name__ == "__main__":  # pragma: no cover
-    Application.main()  # type: ignore
+    Application.main()

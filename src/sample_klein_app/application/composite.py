@@ -1,19 +1,23 @@
+# -*- test-case-name: sample_klein_app.application.test.test_composite -*-
 """
 Composite application
 """
+
+from typing import Optional, Sequence
 
 from twisted.web.iweb import IRequest
 
 from ._main import main
 from .dns import Application as DNSApplication
 from .hello import Application as HelloApplication
-from .klein import Klein, KleinRenderable
 from .math import Application as MathApplication
+from ..ext.klein import Klein, KleinRenderable
 
 
 __all__ = (
     "Application",
 )
+
 
 
 class Application(object):
@@ -26,7 +30,14 @@ class Application(object):
 
     router = Klein()
 
-    main = classmethod(main)  # type: ignore
+
+    @classmethod
+    def main(cls, argv: Optional[Sequence[str]] = None) -> None:
+        """
+        Main entry point.
+        """
+        main(cls, argv)
+
 
     @router.route("/")
     def root(self, request: IRequest) -> KleinRenderable:
@@ -39,6 +50,7 @@ class Application(object):
         """
         return "This is a web application composed from multiple applications."
 
+
     @router.route("/dns/", branch=True)
     def dns(self, request: IRequest) -> KleinRenderable:
         """
@@ -50,6 +62,7 @@ class Application(object):
         """
         return DNSApplication().router.resource()
 
+
     @router.route("/hello/", branch=True)
     def hello(self, request: IRequest) -> KleinRenderable:
         """
@@ -60,6 +73,7 @@ class Application(object):
         :param request: The request to respond to.
         """
         return HelloApplication().router.resource()
+
 
     @router.route("/math/", branch=True)
     def math(self, request: IRequest) -> KleinRenderable:
@@ -73,5 +87,6 @@ class Application(object):
         return MathApplication().router.resource()
 
 
+
 if __name__ == "__main__":  # pragma: no cover
-    Application.main()  # type: ignore
+    Application.main()
